@@ -236,9 +236,13 @@ h1 {
 }
 
 h3 {
-  font-size: 35px;
+  font-size: 25px;
 }
 
+@media (min-width: 700px){
+.intro h3 {
+  font-size: 35px;
+}}
 
 .intro h1 {
   font-size: 35px;
@@ -278,6 +282,8 @@ a.box:hover{
 .intro-link:hover {
   background-color: #2f0901;
 }
+
+
 
 section.success {
     color: #fff;
