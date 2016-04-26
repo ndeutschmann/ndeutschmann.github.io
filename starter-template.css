@@ -344,7 +344,9 @@ section.success {
   opacity:0.8;
  }
 
- .row .social {
+
+
+ .row .social a {
    padding-top: 0.2em ;
    padding-bottom: 0.2em;
  }
