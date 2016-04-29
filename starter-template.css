@@ -2,8 +2,8 @@
 
 body {
   margin: 0;
-  height: 500px;
-  position: relative;
+  height: 100%;
+  position: absolute;
   font-family: 'Roboto','Montserrat',"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
@@ -226,7 +226,7 @@ h6 {
 section {
   /*font-size: 20px;*/
   padding-top: 60px;
-  padding-bottom: 120px;
+  padding-bottom: 100px;
   margin-bottom: 0!important;
 }
 
@@ -234,7 +234,7 @@ section {
 .intro {
   margin-top: 0!important;
   margin-bottom: 0!important;
-  padding-top:100px;
+  padding-top:80px;
   color: #ffffff;
   background: #611302;/*#037a55;
   /*background: #03637A;*/
@@ -255,22 +255,26 @@ h3 {
 
 .intro h1 {
   font-size: 35px;
-  padding-bottom: 40px
+  padding-bottom: 40px;
+  text-align: center;
+
 }
 
-@media (min-width: 700px){
+@media (min-width: 992px){
 .intro h1 {
   font-size: 90px;
-  padding-bottom: 60px
+  padding-bottom: 60px;
+  text-align: left;
 }}
 
 .me {
-  width: 100px;
+  width: 200px;
 }
 
-@media (min-width: 700px){
+
+@media (min-width: 992px){
 .me{
-    width: 300px;
+    width: 100%;
   }
 }
 
