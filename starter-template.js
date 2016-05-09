@@ -9,3 +9,16 @@ $(window).scroll(function() {
 });
 
 $('.starter-template').width($(window).width());
+
+
+jQuery(function($){
+var windowWidth = $(window).width();
+
+$(window).resize(function() {
+    $('.starter-template').width($(window).width());
+    if(windowWidth != $(window).width()){
+    location.reload();
+    return;
+    }
+});
+});
