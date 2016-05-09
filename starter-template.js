@@ -7,3 +7,5 @@ $(window).scroll(function() {
     $('.navbar-brand').removeClass('shrink');
   }
 });
+
+$('.starter-template').width($(window).width());
