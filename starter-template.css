@@ -8,10 +8,6 @@ body {
   font-family: 'Roboto','Montserrat',"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-div {
-   position: absolute;
-}
-
 p {
     font-size: 15px;
     word-wrap: break-word;
