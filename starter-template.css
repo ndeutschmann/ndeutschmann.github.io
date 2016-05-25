@@ -367,8 +367,8 @@ section.success {
 
 
  .row .social a {
-   margin-top: 20px ;
-   margin-bottom: 20px;
+   padding-top: 0.5em ;
+   padding-bottom: 0.5em;
  }
 
 #inspirebutton {
