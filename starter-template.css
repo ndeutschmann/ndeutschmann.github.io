@@ -9,7 +9,7 @@ body {
 }
 
 div {
-   overflow:auto;
+   overflow: visible;
 }
 
 p {
@@ -374,7 +374,7 @@ section.success {
  }
 
 #inspirebutton {
-  padding-left: 0em;
+  height: 40px;
 }
 
 .mailbtn {
