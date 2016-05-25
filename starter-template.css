@@ -371,6 +371,10 @@ section.success {
    margin-bottom: 0.2em;
  }
 
+#inspirebutton {
+  padding-left: 0em;
+}
+
 .mailbtn {
    font-size: 30px;
    font-weight: bold;
