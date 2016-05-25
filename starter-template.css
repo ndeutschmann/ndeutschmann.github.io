@@ -363,14 +363,19 @@ section.success {
   opacity:0.8;
  }
 
+.row.social {
+  margin: 0;
+  padding: 0;
+}
 
- .row .social a  {
-   margin-top: 100px ;
-   margin-bottom: 100px;
+.social {
+   margin-top: 0.3em;
+   margin-bottom: 0.3em;
  }
 
+@media (max-width: 1199px){
 #inspirebutton {
-  height: 40px;
+  margin-top: 2em;
 }
 
 .mailbtn {
