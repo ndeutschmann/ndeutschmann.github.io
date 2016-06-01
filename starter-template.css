@@ -280,11 +280,18 @@ h3 {
 @media (min-width: 992px){
 .intro h1 {
   font-size: 90px;
-  padding-bottom: 60px;
   text-align: left;
+  padding-bottom: 0px;
+}}
+@media (min-width: 992px){
+.titlehead {
+  float: none;
+  display: inline-block;
+  vertical-align: middle;
 }}
 
 .me {
+  margin-top: 20px;
   width: 200px;
 }
 
@@ -349,6 +356,10 @@ section.success {
 
 .research-collapse > * {
   margin-left: 10px;
+}
+
+.research-collapse h4 {
+  display: inline;
 }
 
 .authors a {
@@ -419,8 +430,8 @@ section.success {
 }
 
 .social {
-   margin-top: 0.3em;
-   margin-bottom: 0.3em;
+   margin-top: 0 em;
+   margin-bottom: 0 em;
  }
 
 @media (max-width: 1199px){
