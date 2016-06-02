@@ -365,8 +365,18 @@ section.success {
 }
 }
 
+.research a {
+  font-size: 1em!important;
+}
+
+
+
 .research-collapse {
   text-align: left;
+}
+
+.research-collapse li {
+  margin-bottom: 2em;
 }
 
 .research-collapse > * {
