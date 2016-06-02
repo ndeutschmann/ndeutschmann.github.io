@@ -355,6 +355,10 @@ section.success {
   color: #bbbbbb;
 }
 
+#teaching p {
+  text-align: left;
+}
+
 .research-topic {
   height: 100px;
 }
