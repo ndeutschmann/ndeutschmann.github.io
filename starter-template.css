@@ -449,10 +449,9 @@ section.success {
   opacity:0.8;
  }
 
-.social-panel {
-  align-content: center!important;
-  align-items: center!important;
-  text-align: center!important;
+.social-btns {
+  align-self: center;
+  max-width: 300px;
 }
 
 .row.social {
@@ -466,6 +465,16 @@ section.success {
    margin-top: 0 em;
    margin-bottom: 0 em;
  }
+
+.social-line {
+  border-color: #000000;
+}
+
+
+@media (min-width: 768px){
+  .social-line {
+    border-color: #ffffff;
+}}
 
 @media (max-width: 1199px){
 #inspirebutton {
