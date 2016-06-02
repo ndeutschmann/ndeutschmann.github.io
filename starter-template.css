@@ -14,6 +14,7 @@ p {
 }
 p.small {
     font-size: 10px;
+    text-align: justify;
 }
 
 @media (min-width: 768px){
@@ -193,7 +194,7 @@ h6 {
 }
 
 
-.starter-template a {
+.starter-template a:not(.btn) {
   font-size: 15px;
   font-weight: bold;
   color: #000000;
@@ -201,7 +202,7 @@ h6 {
 }
 
 @media (min-width: 768px){
-.starter-template a {
+.starter-template a:not(.btn){
   font-size: 20px;
   font-weight: bold;
   color: #000000;
@@ -302,12 +303,13 @@ h3 {
   }
 }
 
+
 a.box {
-    color: #ffffff;
+    color: #ffffff!important;
 }
 
 a.box:hover{
-  text-decoration: none;
+  text-decoration: none!important;
 }
 
 .intro-link {
@@ -320,6 +322,10 @@ a.box:hover{
   background-color: #2f0901;
 }
 
+.intro-text {
+  text-align: left;
+}
+
 
 
 section.success {
@@ -329,20 +335,29 @@ section.success {
 }
 
 #teaching {
-  color: #ffffff;
+  color: #eeeeee;
   background-color: #9C6300;
+}
+
+.teaching-experience {
+  text-align: left;
 }
 
 #teaching li {
   font-size: 20px;
 }
 
+#teaching a {
+  color: #ffffff;
+}
+
+#teaching a:hover {
+  color: #bbbbbb;
+}
 
 .research-topic {
   height: 100px;
 }
-
-
 
 @media (min-width: 992px){
 .research > div {
@@ -456,7 +471,5 @@ section.success {
 /*Make Flaticon adapt to env font size*/
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {
-
 font-size: 1em;
-
 }
