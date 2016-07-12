@@ -294,7 +294,7 @@ h3 {
   float: none;
   display: inline-block;
   vertical-align: middle;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }}
 
 .me {
@@ -341,13 +341,20 @@ a.box:hover{
 .cv {
 		padding-top: 1em;
 	padding-bottom:1em;
-	color: #ffffff!important;
+	/*color: #ffffff!important;*/
 
 }
 
-.cv:hover {
+/*.cv:hover {
 	/* outline-style: solid; */
 	color: #aaaaaa!important;
+}*/
+
+
+@media (min-width: 992px){
+	.cv a {
+		font-size: 1.5vw!important;
+	}
 }
 
 .cv a {
@@ -360,11 +367,6 @@ a.box:hover{
 	color: #aaaaaa!important;
 }
 
-@media (min-width: 992px){
-	.cv a {
-		font-size: 1.5vw!important;
-	}
-}
 
 section.success {
     color: #fff;
