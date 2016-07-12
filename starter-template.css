@@ -40,7 +40,7 @@ h6 {
     text-transform: uppercase;
     font-family: 'Montserrat',"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 15px;
     padding: 0px;
     background-color: #01272f;
     /*background-color: #FF7C00; ORANGE*/
@@ -274,7 +274,7 @@ h3 {
 .intro h1 {
 /*   font-size: 35px; */
   font-size: 10vw;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
   text-align: center;
 
 }
@@ -294,6 +294,7 @@ h3 {
   float: none;
   display: inline-block;
   vertical-align: middle;
+  margin-bottom: 40px;
 }}
 
 .me {
@@ -304,9 +305,10 @@ h3 {
 
 @media (min-width: 992px){
 .me{
-    width: 100%;
+    width: 80%;
   }
 }
+
 
 
 a.box {
@@ -327,11 +329,42 @@ a.box:hover{
   background-color: #2f0901;
 }
 
+
 .intro-text {
   text-align: left;
+  padding: 2vw;
 }
 
 
+
+
+.cv {
+		padding-top: 1em;
+	padding-bottom:1em;
+	color: #ffffff!important;
+
+}
+
+.cv:hover {
+	/* outline-style: solid; */
+	color: #aaaaaa!important;
+}
+
+.cv a {
+	padding: 10px;
+	border-style: solid;
+	color: #ffffff!important;
+}
+
+.cv:hover a {
+	color: #aaaaaa!important;
+}
+
+@media (min-width: 992px){
+	.cv a {
+		font-size: 1.5vw!important;
+	}
+}
 
 section.success {
     color: #fff;
