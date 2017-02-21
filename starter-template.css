@@ -247,6 +247,14 @@ section {
   /*background: #03637A;*/
 }
 
+.intro a {
+  color: #ffffff!important;
+}
+
+.intro a:hover {
+  color: #aaaaaa!important;
+}
+
 .research-intro {
   margin-top: 0!important;
   margin-bottom: 0!important;
