@@ -547,6 +547,11 @@ section.success {
     margin-top: 0px;
   }
 
+/*Thesis plot */
+.thesis{
+    width: 100%;
+  }
+
 /*Make Flaticon adapt to env font size*/
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {
