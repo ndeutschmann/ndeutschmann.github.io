@@ -50,8 +50,8 @@
           </li> -->
             <li><a href="#research" target="_self">Research</a></li>
             <li><a href="#teaching" target="_self">Teaching</a></li>
-            <li><a href="#personal" target="_self">Personal</a></li>
-            <li><a href="#contact" target="_self">Contact</a></li>
+<!--             <li><a href="#personal" target="_self">Personal</a></li>--> 
+           <li><a href="#contact" target="_self">Contact</a></li>
         </ul>
         <div class="navbar-right">
           Nicolas Deutschmann
@@ -65,7 +65,7 @@
 <!-- ROW 1 -->
             <div class="row">
 				<div class="col-md-3 titlehead">
-					<img class="img-circle box-shad me" src="me2.png" alt="Me, Nicolas Deutschmann"/>
+					<img class="img-circle box-shad me" src="me2.jpg" alt="Me, Nicolas Deutschmann"/>
 				</div>
 				<div class="col-md-6 titlehead" >
 					<h1 class="myname">Nicolas Deutschmann</h1>
@@ -166,10 +166,24 @@
                 <img class="research-topic" src="QCD.png" alt="QCD"/>
                 <p class="small">
                 A lot of my current activity is devoted to making accurate theoretical predictions for processes in the Standard Model and beyond.
-                I am currently learning and applying several modern techniques for multi-loop Feynman integral computation such as expansion by region and differential equations under the supervision of Claude Duhr and Fabio Maltoni. Together with Eleni Vryonidou, we are working on obtaining the higher order contributions to several processes of interest for putting constraints on new physics using the precision measurements that will be possible in the future runs of the LHC. Hopefully, I will be able to put more detail on this in some time.
+                I am currently developing a fully automated NNLO Monte Carlo simulator named <a href="https://github.com/madnklo/madnklo">MadNkLO</a> with collaborators in Zurich, Switzerland and Debrecen, Hungary. Our goal is to implement a fully general extension of the Colorful method, but also to have a tool general enough to allow other many schemes to be used.
                 </p>
               </div>
               <div class="col-md-8 collapse research-collapse">
+                <h3 class="details-title">Publications</h3>
+                <ul>
+                  <li><a href="https://arxiv.org/abs/1910.01024"><h4>Momentum mappings for subtractions at higher orders in QCD</h4></a>
+                <div class="authors">
+                Vittorio Del Duca, Nicolas Deutschmann, Simone Lionetti
+              </div>
+                  <li><a href="http://arxiv.org/abs/1808.01660"><h4>Top-Yukawa contributions to bbH production at the LHC</h4></a>
+                <div class="authors">
+                Nicolas Deutschmann, Fabio Maltoni, Marius Wiesemann, Marco Zaro
+              </div>
+              <p class="journal">
+                Published in JHEP 1907 (2019) 054
+              </p>              
+            </ul>                
                 <h3 class="details-title">Public Codes</h3>
                 <ul>
                   <li><a href="https://github.com/ndeutschmann/qgrafparser"><h4>QGRAF Parser</h4></a>
@@ -179,57 +193,34 @@
               <p class="journal">
                 <a href="https://zenodo.org/badge/latestdoi/59493394"><img src="https://zenodo.org/badge/59493394.svg" alt="DOI"></a>
               </p></li>
-                  <li><a href="https://github.com/ndeutschmann/qgraf-xml-drawer"><h4>QGRAF Drawer</h4></a>
-                <div class="authors">
-                Draw Feynman diagrams in (Lua)LaTeX automatically using <a href="http://cfif.ist.utl.pt/~paulo/qgraf.html">QGRAF</a> and <a href="https://github.com/JP-Ellis/tikz-feynman/">tikz-feynman</a>
-                </div>
-                <p class="journal">
-                  <a href="https://zenodo.org/badge/latestdoi/59492920"><img src="https://zenodo.org/badge/59492920.svg" alt="DOI"></a>
-                </p>
-              </li>
               </ul>
                 <div class="collapse-btn">
                   <a  class="btn btn-primary btn-sm" target="_self" href="#research" data-toggle="collapse" data-target=".research-collapse">Less details</a>
                 </div>
               </div>
               <div class="col-md-4">
-                <h3>BSM Model-Building</h3>
-                <img class="research-topic" src="bsm-mb.png" alt="XDim spectrum"/>
+                <h3>ML for integration</h3>
+                <img class="research-topic" src="nf.png" alt="normalizing flow"/>
                 <p class="small">
-                  Despite the tremendous success of the Standard Model at particle colliders, we know that our theory for particle interactions is not complete yet. One of the most compelling arguments is the absence of a particle physics explanation for the cosmological observation of Dark Matter. My work in Lyon under Aldo Deandrea's and Giacomo Cacciapaglia's supervision has revolved around finding a theoretically well-motivated model using extra-dimensions to explain the origin of DM. This idea rests on momentum conservation in the extra-dimension stabilizing a neutral Kaluza-Klein particle, which would be our DM. We surveyed homogeneous 6D spaces with positive curvature and built a particle physics model in one of the suitable cases for precise study.
+                  Nearly all particle physics predictions are obtained by computing integrals, many of which are calculated numerically using Monte Carlo methods. Machine learning offers new avenues to optimize the integration process, which could significantly improve the success of methods like adaptive sampling beyond the capabilities of current approaches like VEGAS. I am currently exploring the idea of using normalizing flows to improve the convergence of Monte Carlo integrators and hope to make them part of our standard toolbox.
                 </p>
 
             </div>
               <div class="col-md-8 collapse research-collapse">
-                <h3 class="details-title">Publications</h3>
+                <h3 class="details-title">Preliminary study</h3>
                 <ul>
-                  <li><a href="https://arxiv.org/abs/1603.02289"><h4>Towards Kaluza-Klein Dark Matter on Nilmanifolds</h4></a>
+                  <li><a href="https://ndeutschmann.github.io/tf-toolbox/nf_note.html"><h4>Note on normalizing flows</h4></a>
                 <div class="authors">
-                David Andriot, Giacomo Cacciapaglia, Aldo Deandrea, Nicolas Deutschmann, Dimitrios Tsimpis
+                Nicolas Deutschmann
               </div>
-              <p class="journal">
-                Published in JHEP 1606 (2016) 169
-              </p>
-              </li>
-                  <li><a href="https://arxiv.org/abs/1601.00081"><h4>Dark matter and localised fermions from spherical orbifolds?</h4></a>
-                <div class="authors">
-                Giacomo Cacciapaglia, Aldo Deandrea, Nicolas Deutschmann
-                </div>
-                <p class="journal">
-                  Published in JHEP 1604 (2016) 083
-                </p>
-              </li>
-            </ul>
-
-                <h3 class="details-title">Master Thesis</h3>
+              </ul>
+                <h3 class="details-title">Code</h3>
                 <ul>
-                  <li><a href="https://inspirehep.net/record/1412075"><h4>Physics in Six Universal Dimensions — Effective Models with Spherical Orbifolds</h4></a>
+                  <li><a href="https://github.com/ndeutschmann/tf-toolbox/"><h4>tf-toolbox</h4></a>
                 <div class="authors">
-                Supervised by Aldo Deandrea
-              </div></li>
-            </ul>
-
-
+                Nicolas Deutschmann
+              </div>
+              </ul>              
                 <div class="collapse-btn">
                   <a  class="btn btn-primary btn-sm" data-toggle="collapse" data-target=".research-collapse" target="_self" href="#research">Less details</a>
                 </div>
@@ -238,34 +229,34 @@
                 <h3>BSM Phenomenology</h3>
                 <img class="research-topic" src="bsm-ph.png" alt="collider-sim"/>
                 <p class="small">
-                  Confonting models to the experimental reality in a detailed way has become within the reach of theorists thanks to the development of tools that allow a streamlined transition from the blackboard to the data. This has allowed me to study the phenomenology of both complete models, like our extra-dimensional constructions, and of simplified models, to test ideas for new possible signatures at particle colliders. I learned to use a wide variety of tools to recast experimental analyses and constrain our models by recasting several experimental analyses at the LHC, including detector simulation and event selection, and by using measurements of the relic density to put constraints on  our Dark Matter model, which involved a careful treatment of coannihilation processes.
+                  Despite the tremendous success of the Standard Model at particle colliders, we know that our theory for particle interactions is not complete yet, but we lack experimental evidence to complement it with new fields or interactions. The Standard Model EFT framework is an efficient and consistent way of encoding constraints and agnostically describe correlations between observables, and it is therefore a very desirable to have a large selection of observables predicted with precision and I am contributing to this global effort. I have also worked on Dark matter models based on extra-dimensional theories in the past.
                 </p>
             </div>
               <div class="col-md-8 collapse research-collapse">
                 <h3 class="details-title">Publications</h3>
                 <ul>
+                  <li><a href="http://arxiv.org/abs/1708.00460"><h4>Gluon-fusion Higgs production in the Standard Model Effective Field Theory</h4></a>
+                <div class="authors">
+                Fabio Maltoni, Nicolas Deutschmann, Claude Durh, Eleni Vryonidou
+                </div>
+                <p class="journal">
+                  Published in JHEP 1712 (2017) 063
+                </p>
+              </li> 
+                 <li><a href="http://arxiv.org/abs/1702.00410"><h4>Current LHC Constraints on Minimal Universal Extra Dimensions</h4></a>
+                <div class="authors">
+                Nicolas Deutschmann, Thomas Flacke, Jong Soo Kim 
+                </div>
+                <p class="journal">
+                  Published in Phys.Lett. B771 (2017) 515-520
+                </p>
+              </li>                                               
                   <li><a href="https://arxiv.org/abs/1601.00081"><h4>Dark matter and localised fermions from spherical orbifolds?</h4></a>
                 <div class="authors">
                 Giacomo Cacciapaglia, Aldo Deandrea, Nicolas Deutschmann
                 </div>
                 <p class="journal">
                   Published in JHEP 1604 (2016) 083
-                </p>
-              </li>
-                  <li><a href="https://arxiv.org/abs/1405.6119"><h4> Multi-tops at the LHC</h4></a>
-                <div class="authors">
-                Aldo Deandrea, Nicolas Deutschmann
-                </div>
-                <p class="journal">
-                  Published in JHEP 1408 (2014) 134
-                </p>
-              </li>
-                  <li><a href="https://arxiv.org/abs/1308.1668"><h4>Simulating spin-3/2 particles at colliders</h4></a>
-                <div class="authors">
-                Neil D. Christensen, P. de Aquino, N. Deutschmann, C. Duhr, B. Fuks, C. Garcia-Cely, O. Mattelaer, K. Mawatari, B. Oexl, Y. Takaesu
-                </div>
-                <p class="journal">
-                  Published in Eur.Phys.J. C73 (2013) no.10, 2580
                 </p>
               </li>
             </ul>
@@ -297,7 +288,15 @@
                 <p>
                   <br>
                   <br>
-                  I am a TA at the University of Lyon, I have taught the following classes
+                  As a postdoc at the ETH Zurich, I taught one exercise class and supervised five proseminar projects
+                </p>
+                  <ul>               
+                    <li>
+                      <b>2017</b> - Electroweak theory, exercises (1 semester)
+                    </li>
+                  </ul>                
+                <p>
+                  I was a TA at the University of Lyon, I have taught the following classes
                 </p>
                   <ul>
                     <li>
@@ -338,7 +337,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-8">
+              <div class="col-md-12">
                 <p>
                 I have participated to a science outreach program in French called <a href="https://twitter.com/endirectdulabo">"En direct du Labo"</a> on Twitter.
                 </p>
@@ -346,19 +345,13 @@
                 My contribution has been <a href="https://storify.com/EnDirectDuLabo/nicolas-deutschmann-doctorant-en-physique" >storified.</a>
                 </p>
               </div>
-              <div class="col-md-4">
-                <p>
-                  I might keep an outreach blog here.
-                </p>
-                <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Not Yet!"  class="btn btn-primary btn-lg blogbtn">Blog </a>
-              </div>
             </div>
           </div>
         </section>
 
 
 
-        <section id="personal">
+<!--         <section id="personal">
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
@@ -390,9 +383,9 @@
               </div>
             </div>
           </div>
-        </section>
+        </section> -->
 
-        <section id="thesis">
+<!--         <section id="thesis">
           <div class="container-fluid">
               <div class="row">
                 <div class="col-md-12">
@@ -401,7 +394,7 @@
                 </div>
               </div>
           </div>
-        </section>
+        </section> -->
 
 
         <section id="contact">
@@ -418,11 +411,11 @@
                 </p>
                 <br />
                 <div class="address">
-                  Domaine scientifique de la Doua <br>
-                  Bureau 334 <br>
-                  Bâtiment Paul Dirac <br>
-                  4, Rue Enrico Fermi <br>
-                  69622 Villeurbanne Cedex FRANCE <br>
+                  Institut für Theoretische Physik<br>
+                  HIT G 33.2<br>
+                  Wolfgang-​Pauli-Str. 27<br>
+                  8093 Zürich<br>
+                  Switzerland<br>
                 </div>
               <hr class=social-line>
               </div>
@@ -431,10 +424,7 @@
                   <i class="fa fa-at" aria-hidden="true"></i>  <i class="fa fa-star" aria-hidden="true" style="font-size: 20px; vertical-align: 10px"></i> <i class="fa fa-phone" aria-hidden="true"></i>
                 </p>
                  <br />
-                <a
-                data-toggle="tooltip" data-placement="bottom" data-html="true"
-                 href="http://www.google.com/recaptcha/mailhide/d?k=012FrathNCghOLvy8xdQFk0Q==&amp;c=KQjtTYW96ejow946t89GTfkvZ6Xrtz5c3ln8foJrGyU=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\075012FrathNCghOLvy8xdQFk0Q\75\75\46c\75KQjtTYW96ejow946t89GTfkvZ6Xrtz5c3ln8foJrGyU\075', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="<h4>Captcha</h4>"  class="btn btn-primary btn-lg mailbtn">Email Address</a>
-                 <br />
+                 <p> ndeutschmann@itp.phys.ethz.ch</p>
                  <br />
                  <p>
                    +33 4 72 44 81 33
