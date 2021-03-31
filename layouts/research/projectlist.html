@@ -1,0 +1,29 @@
+{{ define "main" }}
+<div class="container">
+    <h1>{{ .Title }}</h1>
+
+    {{range first 1 .Pages}}
+    <h3>Latest: {{.Title}}</h3>
+    <p>{{.Summary}} 
+        {{if not .Params.private }}
+        <a href="{{.Permalink}}">Keep reading</a>
+        {{else if isset .Params "link"}}
+        <a href="{{.Params.link}}">Keep reading</a>
+        {{end}}</p>
+
+    {{end}}
+
+    <h2>Project list</h2>
+    <ul>
+        {{ range .Pages }}
+        <li>
+            {{if .Params.private}}
+                <a href={{.Params.link}}>{{.Title}}</a> 
+            {{else}}
+                <a href="{{.Permalink}}">{{ .Title }}</a>
+            {{end}}
+        {{ end }}
+        </li>
+    </ul>
+</div>
+{{ end }}

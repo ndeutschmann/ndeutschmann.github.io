@@ -1,0 +1,44 @@
+title = "Nicolas Deutschmann"
+theme = "researcher"
+baseURL = "/"
+disableKinds = ["taxonomy", "term"]
+enableEmoji = true
+math = true          # enable KaTeX (https://katex.org/) globally
+disableHugoGeneratorInject = false
+
+[params]
+  author = "Nicolas Deutschmann"
+  description = "A simple monospaced resume theme for Hugo."
+  favicon = "favicon.ico"  # path to a .ico to use as favicon
+  logo = ""  # url or path to a logo to put in the header
+  math = true
+  [params.footer]
+    text = "Nicolas Deutschmann"
+
+
+[menu]
+  [[menu.footer]]
+    name = "Nicolas Deutschmann"
+    url = "/"
+    weight = 1
+  [[menu.footer]]
+    pre = '<i class="fab fa-twitter"></i> '
+    name = "Twitter"
+    url = "https://www.twitter.com/nickgermann"
+    weight = 2
+  [[menu.footer]]
+    pre = '<i class="fab fa-github"></i> '
+    name = "Github"
+    url = "www.github.com/ndeutschmann"
+    weight = 3  
+  [[menu.footer]]
+    pre = '<i class="fas fa-graduation-cap"></i> '
+    name = "Semantic Scholar"
+    url = "https://www.semanticscholar.org/author/N.-Deutschmann/102335445"
+    weight = 4
+
+[permalinks]
+  "/" = "/:filename"
+
+[markup.goldmark.renderer]
+  unsafe = true  # allow raw HTML in markdown files

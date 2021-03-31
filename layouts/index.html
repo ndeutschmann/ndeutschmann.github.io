@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="container">
+    {{ .Content }}
+</div>
+
+<div class="container">
+    <h1>Posts</h1>
+    <ul>
+    	{{ with .Site.GetPage "/posts" }}
+        	{{ range .Pages }}
+            <li><a href="{{ .Permalink }}">{{ .Date.Format "2006-01-02" }} | {{ .Title }}</a></li>
+        	{{ end }}
+        {{ end }}
+    </ul>
+</div>
+{{ end }}

@@ -1,0 +1,78 @@
+h1 {
+	font-size: 2rem!important;
+}
+
+h2 {
+	font-size: 1.3rem!important;
+}
+
+ul {
+	padding-left: 0!important;
+}
+
+.researchpage h2 a{
+	color: #222!important;
+	font-size: 1.2rem;
+}
+
+.researchpage h2{
+	margin-bottom: 0!important;
+}
+.researchpage p{
+	margin-bottom: 5px!important;
+	margin-top: 0!important;
+	padding: 0!important;
+	min-height: 0!important;
+}
+
+.researchpage p.archive {
+	padding-top: 1.5em!important;
+	text-align: left;
+}
+
+.resume h2 {
+	padding-bottom: 0!important;
+	margin-bottom: 0!important;
+}
+
+.cv {
+	width: 100%; 
+	padding: 0!important;
+	margin: 0!important;
+}
+
+.cv p.spaceout {
+	padding: 0!important;
+	margin: 0!important;
+	justify-content: space-between;
+	display: flex;
+}
+
+.cv .spaceout span{
+	color: #777!important;	
+	padding: 0!important;
+	margin: 0!important;
+}
+
+.cv p.location {
+	color: #777!important;	
+	padding: 0!important;
+	margin: 0!important;
+	padding-bottom: .5em!important;
+	width: 100%;
+	text-align: left;
+}
+
+#footer a:hover {
+	text-decoration: none;
+	color: #777!important;
+}
+
+#footer a:hover i{
+	text-decoration: none;
+	color: #777!important;
+}
+
+img {
+	max-width: 100%;
+}

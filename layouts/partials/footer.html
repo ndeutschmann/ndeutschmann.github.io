@@ -1,0 +1,22 @@
+<div id="footer" class="mb-5">
+        <hr>
+        <div class="container text-center">
+	{{- with .Site.Menus.footer -}}
+	    {{- $navbar_len := len . -}}
+	    {{- range $i, $nav_item := . -}}
+	    	<small>
+            	<a href="{{ $nav_item.URL }}">
+	            {{- if ne $nav_item.Pre "" -}}
+	        		{{- trim $nav_item.Pre " " | markdownify -}}
+	        	{{- else -}}
+	        		{{- trim $nav_item.Name " " | markdownify -}}
+	        	{{- end -}}
+	        	</a>
+	        </small>
+	        {{- if ne (add $i 1) $navbar_len -}}
+	            <span class="nav-item navbar-text mx-1">/</span>
+	        {{- end -}}
+	    {{- end -}}
+	{{- end -}}
+	</div>
+</div>

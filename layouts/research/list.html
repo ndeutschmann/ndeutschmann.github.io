@@ -1,0 +1,23 @@
+{{ define "main" }}
+<div class="container">
+    <p>{{.Content}}</p>
+
+    {{ range .Pages }}
+    	<hr>
+        <h1>{{ .Title }}</h1>
+    <div class="researchpage">   
+        {{.Summary | markdownify}}
+        {{range first 5 .Pages}}
+            <h2>{{if .Params.private}}
+                <a href={{.Params.link}}>{{.Title}}</a> 
+                {{else}}
+                <a href="{{.Permalink}}">{{ .Title }}</a>
+                {{end}}</h2>
+            <p>{{.Summary}}</p>
+        {{end}}
+        <p class="archive"><a href="{{.Permalink}}">> {{ .Title }} archive</a></p>
+    </div>
+    {{ end }}
+
+</div>
+{{ end }}

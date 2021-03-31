@@ -1,0 +1,5 @@
+<div class="cv">
+	<p class="spaceout"><span>{{.Get "title"}}</span> <span>{{.Get "dates"}}</span></p>
+	<p class="location">{{.Get "location"}}</p>
+	<p>{{.Inner | markdownify}}</p>
+</div>
