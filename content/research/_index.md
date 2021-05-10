@@ -7,16 +7,9 @@ weight: 1
 
 # Research interests
 
-I work new AI-powered tools to diagnose and treat colo-rectal cancer patients.
-In particular, I am focussing on integrating multi-modal data to predict molecular cancer subtypes
-based on multi-omics and histological images.
+Most of my activity is oriented toward improving the care we provide to cancer patients by refining our understanding of molecular mechanisms that underly specific illnesses and develping novel diagnostics and prognosis tools.
 
-The goal of this work is two-fold:
-* Improving clinical patient stratification, which is now based on hard-to-scale genetic profiling.
-* Improve our understanding of the mechanics of the disease and its response to treatments for better future care, including personalized chemotherapies.
+My work is focused around the establishment of new interpretable AI methods based on Deep Learning to uncover the information contained in the proteome of cancer cells. I am particularly interested in predicting clinical features from ecosystems of single cells inside tumors to enable molecular-biology-powered, high-granularity diagnostic systems which could:
 
-I am working on several directions to this end:
-* Advanced machine-learning models that integrate the variety of different data provided by our colleagues working in biological, pharmacological and clinical research.
-* Translation of lab-built models into tools we can trust to use in hospitals. Failures should be detectable by the system or its users.
-* Exploration of how we can use AI to generate new scientific knowledge through interpretability and model-informed machine-learning.
-
+- be used for clinical applications in personalized medicine
+- help us understand cancer better by connecting clinical data to cell-population-level information and to single-cell pictures

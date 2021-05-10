@@ -10,23 +10,26 @@ ul {
 	padding-left: 0!important;
 }
 
-.researchpage h2 a{
+.researchpage li a{
 	color: #222!important;
-	font-size: 1.2rem;
+	font-weight: bold;
+	font-size: 1.1rem;
 }
 
-.researchpage h2{
-	margin-bottom: 0!important;
+.researchpage li{
+	margin: 0!important;
+	padding: 0!important;
+	padding-top: .2em!important;
 }
 .researchpage p{
-	margin-bottom: 5px!important;
+	margin-bottom: 0px!important;
 	margin-top: 0!important;
 	padding: 0!important;
 	min-height: 0!important;
 }
 
 .researchpage p.archive {
-	padding-top: 1.5em!important;
+	padding-top: .1em!important;
 	text-align: left;
 }
 

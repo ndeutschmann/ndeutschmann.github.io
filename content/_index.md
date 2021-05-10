@@ -7,8 +7,8 @@
 
 ## Who I am
 
-I am a Research Scientist at IBM research in Zurich working in the
-Systems Biology Group with Maria Rodriguez Martinez. 
+I am a Research Scientist working in the
+Systems Biology Group at IBM Research in Zurich, Switzerland.
 
 I am a theoretical
 physicist by training: I studied at the École Normale Supérieure de Lyon
@@ -18,6 +18,5 @@ Hadron Collider, in particular to help understand the precise nature of the Higg
 
 ## What I am working on
 
-I am now transitioning into the field of machine learning applied to cancer biology. Together
-with researchers from ETH Zurich and the University Hospitals in Bern and Zurich, I work new AI-powered tools to diagnose and care for colo-rectal cancer patients.
+I am now transitioning into the field of machine learning applied to cancer biology. I work on interpretable and robust machine learning applications to cancer biology, in particular on single-cell and imaging mass cytometry data.
 Read more about it on my [research page.](research)

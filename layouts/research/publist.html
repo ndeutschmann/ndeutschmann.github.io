@@ -2,7 +2,7 @@
 <div class="container">
     <h1>{{ .Title }}</h1>
     <ul>
-        {{ range .Pages }}
+        {{ range .Pages.ByDate.Reverse}}
             <li>{{if .Params.private}}
                 <a href={{.Params.link}}>{{.Title}}</a> 
                 {{else}}
