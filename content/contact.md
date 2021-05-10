@@ -7,7 +7,7 @@ weight: 110
 
 <i class="fas fa-university"></i> Institution: [IBM Research Zürich](https://www.zurich.ibm.com/)  
 <i class="far fa-envelope"></i> Email: [nicolas.deutschmann@gmail.com](mailto:nicolas.deutschmann@gmail.com)  
-<i class="fas fa-phone"></i> Phone: +41 000 00 00
+<!-- <i class="fas fa-phone"></i> Phone: +41 000 00 00 -->
 
 
 
