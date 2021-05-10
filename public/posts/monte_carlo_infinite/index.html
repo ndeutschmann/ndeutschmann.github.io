@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Monte Carlo Integrals over $\mathbb{R}$</title>
+    <meta name="description" content="A simple monospaced resume theme for Hugo.">
+    <meta name="author" content='Nicolas Deutschmann'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="/fontawesome/css/all.css" rel="stylesheet"> 
+
+    
+    <link rel="stylesheet" href="/sass/researcher.min.css">
+
+    <link href="/style_tweaks.css" rel="stylesheet">     
+
+    
+        <link rel="icon" type="image/ico" href="/favicon.ico">
+    
+
+    
+        
+    
+
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\[", right: "\\]", display: true},
+                {left: "$", right: "$", display: false},
+                {left: "\\(", right: "\\)", display: false}
+            ]
+        });
+    });
+</script>
+
+    <body><div class="container mt-5">
+    <nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0">
+        <a class="navbar-brand mx-0 mr-sm-auto" href="/">
+          
+          Nicolas Deutschmann
+        </a>
+        <div class="navbar-nav flex-row flex-wrap justify-content-center">
+            
+                
+                
+                    <a class="nav-item nav-link" href="/research/">
+                        Research
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/posts/">
+                        Posts
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/resume/">
+                        Resume
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/contact/">
+                        Contact
+                    </a>
+                    
+                
+            
+        </div>
+    </nav>
+</div>
+<hr>
+<div id="content">
+<div class="container">
+	<h1>Monte Carlo Integrals over $\mathbb{R}$</h1>
+    <p>Monte Carlo integration provides a way to compute integrals numerically with an algorithm that has the same convergence class (uncertainty $\sim \mathcal{O}(1/\sqrt{N})$ ) independently of the dimension of the integration domain (as opposed to methods like the trapezoid approximation).</p>
+<p>Integrating over a finite volume is quite easy: you need to find a parametrization of your domain such that each variable spans a fixed interval and one can then rely on any strictly probability distribution over this interval to sample points.</p>
+<p>$$\int_{a}^{b} dx f(x) = \int_{a}^{b} dx p(x) \dfrac{f(x)}{p(x)} = \underset{x\sim p}{\mathbb{E}} \dfrac{f(x)}{p(x)}$$</p>
+<p>In particular, if one samples uniformly,</p>
+<p>$$\int_a^b dx f(x) = (b-a) \times\underset{x\sim U_{[a,b]}}{\mathbb{E}}f(x)$$</p>
+<p>Sampling over all of $\mathbb{R}$ is, however, slightly more complicated. The first idea one could have would be to observe that any function we integrate should go to zero fast enough at infinity. As a result, it seems reasonable to integrate over a finite, large enough interval, and maybe even try to extrapolate the result from multiple interval sizes.</p>
+<p>The issue with this approach is that, while it is always possible to evaluate an integral over such a finite volume, the variance of the result will reach infinity as we grow the interval size. Meaning that there is a conflict between needing to increase the interval size to get a good approximation of the infinite integral and having ever less accurate estimates.</p>
+<p>It is quite easy to show how this problem arises:</p>
+<p>Let us integrate a function over an interval of size $L$, symmetric around 0</p>
+<p>$$I(L) = \int_{-L/2}^{L/2} dx f(x) = L \times\underset{x\sim U_{L}}{\mathbb{E}}f(x)$$</p>
+<p>If we build a flat Monte Carlo estimator,   $\hat{I}(L) = L f(X), X\sim U_L$ , we can easily compute its variance:</p>
+<p>$$\sigma^2\left(\hat{I}(L)\right) = L^2 \left(\underset{x\sim U_{L}}{\mathbb{E}}\left(f(x)^2\right) - \left(\underset{x\sim U_{L}}{\mathbb{E}}f(x)\right)^2\right)
+= L \int_{-L/2}^{L/2} dx f(x)^2  - I(L)^2$$</p>
+<p>The variance is finite if $f^2$ is integrable. However, it grows linearly with the size of the integral. Depending on the functio   n to integrate, this might or might not be a problem, as illustrated below, but in general, the method is unreliable and not guaranteed to work.</p>
+<hr>
+<p><img src="/montecarloRbad.png" alt="monteCarloRbad.png">
+<em>If the variance of the estimator grows too fast before the finite-volume integral approximates the full integral well, we cannot use uniform sampling.</em></p>
+<p><img src="/montecarloRgood.png" alt="MonteCarloRgood.png">
+<em>If the finite-volume integral converges to the full integral faster than the variance diverges, there might be a sweet spot where we have a good approximation with a manageable variance.</em></p>
+<hr>
+<p>An astute observer would determine that the low-level mechanistic reason why we are having this issue is that we are using a uniform sampling procedure, which makes this annoying factor of $L$ appear in front of the variance. A more high-minded way of saying this is that we keep thinning out the amount of sampling that we do in the regions where $f$ has a significant contribution as we expand the integration region, which in turns increases the variance in an unsustainable way.</p>
+<p>An alternative solution could therefore be to sample non uniformly. Many programming languages provide ways to sample from a normal distribution for example, which has support over all of $\mathbb{R}$ in principle. Of course, a computer will only allow you to sample over a finite interval defined by the size of the floating point system you are using; what we are after is an integration procedure that converges nicely to the nice result as we increase the size of this finite interval. Let us look at what happens if we sample from an arbitrary, strictly positive PDF $p$ defined over all of $\mathbb{R}$.</p>
+<p>$$I(L,p) = \int_{-L/2}^{L/2} dx p(x) \frac{f(x)}{p(x)} = \underset{x\sim p}{\mathbb{E}} \frac{f(x)}{p(x)}$$</p>
+<p>We again build an estimator for this expectation value using a random variable:</p>
+<p>$$\hat{I}(L,p) = \frac{f(X)}{p(X)},\quad X\sim p,$$</p>
+<p>whose variance is</p>
+<p>$$\sigma^2\left(\hat{I}(L,p)\right) = \left(\underset{x\sim p}{\mathbb{E}}\left(\frac{f(x)}{p(x)}\right)^2 - \left(\underset{x\sim p}{\mathbb{E}}\frac{f(x)}{p(x)}\right)^2\right)
+= \int_{-L/2}^{L/2} dx \frac{f(x)^2}{p(x)}  - I(L,p)^2$$</p>
+<p>Which is giving us the condition we need to have a variance whose asymptotic behavior is independent of the the integration domain size: if the integral</p>
+<p>$$\int_{-\infty}^{\infty} dx \frac{f(x)^2}{p(x)}$$</p>
+<p>is convergent, then we can increase $L$ to a large enough value that $\hat{I}(L,p)$ is a good approximant of the full integral without making its variance blow up.</p>
+<p>What PDF $p$ should we be using and how do we efficiently sample from them? The result above indicates that $p$ should be going to 0 slow enough at infinity so that the integral converges, which already tells us that not all functions can be integrated using this approach <em>although they are mathematically integrable.</em> For example, if $f(x)^2$  is not integrable, no $p$ will do the trick.</p>
+<p>Let us use specific  PDFs to get an idea of what the confitions on $f$ can be. If we take a normal distribution $p(x) \propto \exp(-x^2)$, then we need the following integral to converge</p>
+<p>$$\int_{-\infty}^{\infty} dx \exp(x^2) f(x)^2,$$</p>
+<p>which might be a little constraining. We might want to use other PDFs to be able to integrate more functions.</p>
+<p>This actually raises the question of how one actually does sample from a given PDF. In general, this is a hard problem, but there is a class of PDFs from which we can sample efficiently, which are those obtained by mapping another, simpler PDF using some bijective function.</p>
+<p>The short version of it in one dimension is that if you sample $Y$ uniformly and obtain $X = Q(Y)$ where $Q$  is a bijection, then the PDF for $X$ is $p(x) = \left| \dfrac{dQ^{-1}}{dx} \right|$, where $Q^{-1}$ is the inverse mapping.</p>
+<p>This is actually how one obtains normally distributed variables, where the mapping is called the <a href="https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform">Box-Muller transform</a>. In general, to integrate over $\mathbb{R}$, we want to start by sampling $X$ over a finite interval like $[0,1]$ and then map it using a function that has poles at $0$ and $1$. A commonly used function is the tangent. If we sample $y$ uniformly over $[0,1]$, we can define</p>
+<p>$$x = \tan\left(\pi (y-1/2) \right),$$</p>
+<p>which spans all of $\mathbb{R}$ following a Cauchy distribution,</p>
+<p>$$p(x) = \frac{1}{\pi} \frac{1}{1+x^2}$$</p>
+<p>which yields a much gentler Monte Carlo estimator convergence condition: the following integral has to converge</p>
+<p>$$\int_{-\infty}^{+\infty} dx (1+x^2) f(x)^2.$$</p>
+<p>This is why, general purpose integrators such as ZuNIS or VEGAS typically integrate functions over the unit hypercube: even if you want to integrate over an infinite domain, you need to go through reformulating your problem as an integral over a finite interval. As a result, the unit hypercube provides a simple and very general interface to most integrals you might want to compute using importance sampling.</p>
+
+</div>
+
+        </div><div id="footer" class="mb-5">
+        <hr>
+        <div class="container text-center"><small>
+            	<a href="/">Nicolas Deutschmann</a>
+	        </small><span class="nav-item navbar-text mx-1">/</span><small>
+            	<a href="https://www.twitter.com/nickgermann"><i class="fab fa-twitter"></i></a>
+	        </small><span class="nav-item navbar-text mx-1">/</span><small>
+            	<a href="www.github.com/ndeutschmann"><i class="fab fa-github"></i></a>
+	        </small><span class="nav-item navbar-text mx-1">/</span><small>
+            	<a href="https://www.semanticscholar.org/author/N.-Deutschmann/102335445"><i class="fas fa-graduation-cap"></i></a>
+	        </small></div>
+</div>
+</body>
+</html>

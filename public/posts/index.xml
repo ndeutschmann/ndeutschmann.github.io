@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Nicolas Deutschmann</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on Nicolas Deutschmann</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 25 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Monte Carlo Integrals over $\mathbb{R}$</title>
+      <link>/posts/monte_carlo_infinite/</link>
+      <pubDate>Thu, 25 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/monte_carlo_infinite/</guid>
+      <description>Monte Carlo integration provides a way to compute integrals numerically with an algorithm that has the same convergence class (uncertainty $\sim \mathcal{O}(1/\sqrt{N})$ ) independently of the dimension of the integration domain (as opposed to methods like the trapezoid approximation).
+Integrating over a finite volume is quite easy: you need to find a parametrization of your domain such that each variable spans a fixed interval and one can then rely on any strictly probability distribution over this interval to sample points.</description>
+    </item>
+    
+  </channel>
+</rss>

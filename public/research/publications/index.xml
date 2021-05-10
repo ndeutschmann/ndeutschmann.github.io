@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Publications on Nicolas Deutschmann</title>
+    <link>/research/publications/</link>
+    <description>Recent content in Publications on Nicolas Deutschmann</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="/research/publications/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Quark mass effects in two-loop Higgs amplitudes</title>
+      <link>/research/publications/higgs_quark_masses/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/research/publications/higgs_quark_masses/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Momentum mappings for subtractions at higher orders in QCD</title>
+      <link>/research/publications/momentum_mappings/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/research/publications/momentum_mappings/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Top-Yukawa contributions to bbH production at the LHC</title>
+      <link>/research/publications/bb_higgs/</link>
+      <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/research/publications/bb_higgs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gluon-fusion Higgs production in the Standard Model Effective Field Theory</title>
+      <link>/research/publications/smeft_higgs/</link>
+      <pubDate>Tue, 01 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/research/publications/smeft_higgs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Current LHC Constraints on Minimal Universal Extra Dimensions</title>
+      <link>/research/publications/mued_lhc/</link>
+      <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/research/publications/mued_lhc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Towards Kaluza-Klein Dark Matter on Nilmanifolds</title>
+      <link>/research/publications/nilmanifolds/</link>
+      <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/research/publications/nilmanifolds/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dark matter and localised fermions from spherical orbifolds?</title>
+      <link>/research/publications/spherical_orbifolds/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/research/publications/spherical_orbifolds/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Multi-tops at the LHC</title>
+      <link>/research/publications/multi_tops/</link>
+      <pubDate>Thu, 01 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/research/publications/multi_tops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Simulating spin-3/2​ particles at colliders</title>
+      <link>/research/publications/spin_32/</link>
+      <pubDate>Thu, 01 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/research/publications/spin_32/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
