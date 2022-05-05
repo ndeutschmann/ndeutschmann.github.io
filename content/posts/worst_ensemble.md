@@ -2,6 +2,31 @@
 title: "Worst-case scenario for a model ensemble"
 date: 2022-05-03
 ---
+# Introduction
+It's part of machine learning "folk wisdom" that ensembles of models are a good way to really optimize your prediction and getting the most of your data. Kaggle competitions are often won by ensembles, and there are some theoretical guarantees that make you fell good about them (although their hypotheses are never verified in real life). In practice, it's definitely mostly a good idea to use ensembles; they do most often improve performance and they have other advantages such as providing some ways to estimate uncertainty by checking the agreement of the different models.
+
+But is it guaranteed that an ensemble will perform better than the individual models that make it up? I certainly had an intuition that, at least, the ensemble cannot be **much** worse than its components. 
+Just the other day, a Master's student of mine showed me results where they had five models with an accuracy of 90%, but which yielded a 65% accuracy when ensembled. I immediately knew something was up, without knowing exactly how to justify it, and indeed a small bug had crept up in their ensembling code.
+
+While in this specific case, the issue was just human error (which it most often is), it lead me to wonder about this expectation I had about model ensembles. Can we actually put a lower bound on the accuracy of an ensemble based on its components? Together with Francesco Craighero, a PhD student visiting the IBM Zurich lab whom I'm supervising, we found out that there is! I'll cut the story short for the impatient reader: at worst, the error rate of your ensemble can be about **twice** that of your individual models (assuming they have comparable accuracies)!
+
+So there is indeed a lower bound on the accuracy of an ensemble, but it's actually lower than I would naively have expected! 
+
+# Not a proof
+
+Let us start with something that is often quoted when discussing the properties of ensembles, which is a theorem about their asymptotic properties:
+
+**Theorem:** Given $n$ uncorrelated binary classification models that have a probability $p>0.5$ of being correct on each data point, the asymptotic accuracy of their majority-voting ensemble is $1$ as $n\to \infty$.
+
+This probabilistic approach is based on modelling the probability of each model on each datapoint as a Bernouilli random variable. We could use it to evaluate the distribution of accuracies when there is a finite number of models, but we would find that there is always a probability that the ensemble has accuracy $0$, which can happen for example when all individual models have an accuracy of $0$. This is due to the probabilistic description of accuracy used for this theorem, but we would probably discard models with terrible validation accuracy in real life. We could use this description to have a confidence interval on the accuracy of the ensemble, but I think we should have a prior on the actual performance of the models we want to ensemble because this is a lot more realistic.
+
+# A combinatorial problem
+A better description of a set of models we want to ensemble is to have a fixed test dataset, and models with a well-defined accuracy on this dataset. This means that each model is known to be correct on a pre-defined number of test data points, and wrong on the rest.
+Now, for the ensemble to be correct or wrong about a given test data point, we need a majority of the models to be correct or wrong about this data point.
+The spirit of the problem can be formulated in the following way: each model has a finite budget of errors it can make on the dataset because of its fixed accuracy. The worst case is going to be when the errors are distributed such that enough models "agree on being wrong" on the same data points, and that the maximal number of such data points is maximum. 
+
+This is a constrained combinatorial optimization problem: for each point where the ensemble is wrong, more than half of the individual models are wrong, which depletes each of their "error budget". So the worst possible case is where we swap accross models to avoid using up all the budget of the same models together. We'll formalize the problem in the symmetric case (when all the models have the same accuracy, which is probably the only one where we can hope for an analytic formula) and prove the claim above, which is that the error rate can at worse be doubled.
+
 
 # Formalizing the problem
 
@@ -36,8 +61,10 @@ The last two constraints mean respectively that the majority of individual model
 First of all let us establish something: the best solution has to use the error budget to the best possible efficiency. This means that necessarily, each $v_i$ will have exactly $n+1$ entries equal to $1$.
 
 We will prove the following steps:
+
 1. $E^*_\text{ens}$ is an increasing function of $E$
-2. If $E=p(n+1)$, $E^*_\text{ens}=(2n+1)k$ 
+
+2. If $E=p(n+1)$, $E^*_\text{ens}=(2n+1)p$ 
 
 Which leads to the framing inequality we claimed above because 
 $$(n+1)\left(1+\left\lfloor\frac{E}{n+1}\right\rfloor\right) \geq E\geq (n+1)\left\lfloor\frac{E}{n+1}\right\rfloor $$  
@@ -59,7 +86,7 @@ After $n+1$ total steps, we get this nice valley pattern:
 $$B_{n+1} = (E-1,\, E-2,\, E-3,\,\dots,\,E-n,\,E-(n+1),\, E-n,\, \dots,\, E-3,\, E-2,\, E-1),$$
 which should be clear because for the first $n$ entries, their position is the number of vectors they get subtracted before the "window of $1$s" leaves them, and the reverse happens for the last $n$ entries. The middle entries is subtracted for every single of these first $n+1$ steps.
 
-Now if we apply one more step, we see that the window applies to the last $n$ entries and the first one. Each one of the last $n$ entries will be covered by the window exactly the number of times needed to reach $E-(n+1), and the same will happen for the first $n$, while the middle entry will be left untouched.
+Now if we apply one more step, we see that the window applies to the last $n$ entries and the first one. Each one of the last $n$ entries will be covered by the window exactly the number of times needed to reach $E-(n+1)$, and the same will happen for the first $n$, while the middle entry will be left untouched.
 
 So after $2n+1$ steps, we reach a symmetric situation gain with
 $$B_{2n+1}=(E-(n+1),\dots,E-(n+1)),$$
