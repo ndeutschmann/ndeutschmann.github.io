@@ -10,7 +10,12 @@ Just the other day, a Master's student of mine showed me results where they had 
 
 While in this specific case, the issue was just human error (which it most often is), it lead me to wonder about this expectation I had about model ensembles. Can we actually put a lower bound on the accuracy of an ensemble based on its components? Together with Francesco Craighero, a PhD student visiting the IBM Zurich lab whom I'm supervising, we found out that there is! I'll cut the story short for the impatient reader: at worst, the error rate of your ensemble can be about **twice** that of your individual models (assuming they have comparable accuracies)!
 
-So there is indeed a lower bound on the accuracy of an ensemble, but it's actually lower than I would naively have expected! 
+To make it more exact, if we have $N$ datapoints, and our $2n+1$ individual models have an error rate of $e$ (where $e=1-\text{accuracy}$), we will prove that the worst possible error rate for the ensemble $e^*_\text{ens}$ has the following asymptotic behavior
+
+$$\lim_{N\to\infty}e^*_\text{ens} = \left(2-\frac{1}{n+1}\right) e$$
+
+
+So there is indeed a lower bound on the accuracy of an ensemble, but it's actually worse than I would naively have expected! 
 
 # Not a proof
 
@@ -21,7 +26,7 @@ Let us start with something that is often quoted when discussing the properties 
 This probabilistic approach is based on modelling the probability of each model on each datapoint as a Bernouilli random variable. We could use it to evaluate the distribution of accuracies when there is a finite number of models, but we would find that there is always a probability that the ensemble has accuracy $0$, which can happen for example when all individual models have an accuracy of $0$. This is due to the probabilistic description of accuracy used for this theorem, but we would probably discard models with terrible validation accuracy in real life. We could use this description to have a confidence interval on the accuracy of the ensemble, but I think we should have a prior on the actual performance of the models we want to ensemble because this is a lot more realistic.
 
 # A combinatorial problem
-A better description of a set of models we want to ensemble is to have a fixed test dataset, and models with a well-defined accuracy on this dataset. This means that each model is known to be correct on a pre-defined number of test data points, and wrong on the rest.
+A better model for ensembling is a collection models with a well-defined accuracy acting on a finite dataset. This means that each model is known to be correct on a pre-defined number of test data points, and wrong on the rest.
 Now, for the ensemble to be correct or wrong about a given test data point, we need a majority of the models to be correct or wrong about this data point.
 The spirit of the problem can be formulated in the following way: each model has a finite budget of errors it can make on the dataset because of its fixed accuracy. The worst case is going to be when the errors are distributed such that enough models "agree on being wrong" on the same data points, and that the maximal number of such data points is maximum. 
 
@@ -37,12 +42,21 @@ We want to define a model ensemble by majority voting, which will predict correc
 What is the worse possible accuracy that this model ensemble can reach?
 
 ## Result
+Before going into the technicalities, let us announce what we're going to prove.
 
-The worst number $E^*_\text{ens}$ of data points incorrectly predicted by such a model ensemble verifies
+The worst number $E^*_\text{ens}=e^\* N$ of data points incorrectly predicted by such a model ensemble verifies
 
 $$ (2n+1) \left(1+\left\lfloor\frac{E}{n+1}\right\rfloor\right) \geq E^*_\text{ens} \geq (2n+1) \left\lfloor\frac{E}{n+1}\right\rfloor.$$
 
 The lower bound is actually $\min\left(N,(2n+1) \left\lfloor\dfrac{E}{n+1}\right\rfloor\right)$, because of course the number of errors cannot be larger than the total number of data points, but we will assume that this is never the case.
+
+&nbsp; 
+
+In the limit of a large dataset $N\to\infty$, $\left\lfloor\dfrac{E}{n+1}\right\rfloor \sim \dfrac{E}{n+1}$ and $\dfrac{2n+1}{n+1}\sim 2$ so that both the upper and lower bounds of the inequality become asymptotically equivalent to $2E$, hence proving the result we claimed in the introduction.
+
+&nbsp; 
+
+But of course, the real meat is proving the inequality in the first place! So let's get to it.
 
 ## Setting up notation
 The important information we need to keep track of is the "error budget" that each model has. We can reframe the problem as follow:
@@ -81,12 +95,12 @@ We then build $v_{i+1}$ from $v_i$ by applying a circular permutation to its ent
 If we subtract the first vector, the budget will look like
 $$B_1 = B-v_1 = (E-1,\dots,E-1,E,\dots,E).$$
 After one more step, we get
-$$B_2 = (E-1, E-2, \dots, E-2, E-1,\dots,E).$$
+$$B_2 = B-v_1-v_2 = (E-1, E-2, \dots, E-2, E-1,\dots,E).$$
 After $n+1$ total steps, we get this nice valley pattern:
-$$B_{n+1} = (E-1,\, E-2,\, E-3,\,\dots,\,E-n,\,E-(n+1),\, E-n,\, \dots,\, E-3,\, E-2,\, E-1),$$
+$$B_{n+1} = (E-1,\ E-2,\ E-3,\ \dots,\ E-n,\ E-(n+1),\ E-n,\ \dots,\ E-3,\ E-2,\ E-1),$$
 which should be clear because for the first $n$ entries, their position is the number of vectors they get subtracted before the "window of $1$s" leaves them, and the reverse happens for the last $n$ entries. The middle entries is subtracted for every single of these first $n+1$ steps.
 
-Now if we apply one more step, we see that the window applies to the last $n$ entries and the first one. Each one of the last $n$ entries will be covered by the window exactly the number of times needed to reach $E-(n+1)$, and the same will happen for the first $n$, while the middle entry will be left untouched.
+Now if we apply one more step, we see that the window applies to the last $n$ entries and the first one. Going on for a total of $n$ steps, each one of the last $n$ entries will be covered by the window exactly the number of times needed to reach $E-(n+1)$, and the same will happen for the first $n$, while the middle entry will be left untouched.
 
 So after $2n+1$ steps, we reach a symmetric situation gain with
 $$B_{2n+1}=(E-(n+1),\dots,E-(n+1)),$$
