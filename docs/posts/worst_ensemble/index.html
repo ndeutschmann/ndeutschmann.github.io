@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Worst-case scenario for a model ensemble</title>
+    <meta name="description" content="A simple monospaced resume theme for Hugo.">
+    <meta name="author" content='Nicolas Deutschmann'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="/fontawesome/css/all.css" rel="stylesheet"> 
+
+    
+    <link rel="stylesheet" href="/sass/researcher.min.css">
+
+    <link href="/style_tweaks.css" rel="stylesheet">     
+
+    
+        <link rel="icon" type="image/ico" href="/favicon.ico">
+    
+
+    
+        
+    
+
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\[", right: "\\]", display: true},
+                {left: "$", right: "$", display: false},
+                {left: "\\(", right: "\\)", display: false}
+            ]
+        });
+    });
+</script>
+
+    <body><div class="container mt-5">
+    <nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0">
+        <a class="navbar-brand mx-0 mr-sm-auto" href="/">
+          
+          Nicolas Deutschmann
+        </a>
+        <div class="navbar-nav flex-row flex-wrap justify-content-center">
+            
+                
+                
+                    <a class="nav-item nav-link" href="/research/">
+                        Research
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/posts/">
+                        Posts
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/resume/">
+                        Resume
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/contact/">
+                        Contact
+                    </a>
+                    
+                
+            
+        </div>
+    </nav>
+</div>
+<hr>
+<div id="content">
+<div class="container">
+	<h1>Worst-case scenario for a model ensemble</h1>
+    <h1 id="introduction">Introduction</h1>
+<p>It&rsquo;s part of machine learning &ldquo;folk wisdom&rdquo; that ensembles of models are a good way to really optimize your prediction and getting the most of your data. Kaggle competitions are often won by ensembles, and there are some theoretical guarantees that make you fell good about them (although their hypotheses are never verified in real life). In practice, it&rsquo;s definitely mostly a good idea to use ensembles; they most often improve performance and provide some ways to estimate uncertainty by checking the agreement of the different models.</p>
+<p>But is it guaranteed that an ensemble will perform better than the individual models that make it up? I certainly had an intuition that, at least, the ensemble cannot be <strong>much</strong> worse than its components.
+Just the other day, a Master&rsquo;s student of mine showed me results where they had five models with an accuracy of 90%, but which yielded a 65% accuracy when ensembled. I immediately knew something was up, without knowing exactly how to justify it, and indeed a small bug had crept up in their ensembling code.</p>
+<p>While in this specific case, the issue was just human error (which it most often is), it lead me to wonder about this expectation I had about model ensembles. Can we actually put a lower bound on the accuracy of an ensemble based on its components? Together with Francesco Craighero, a PhD student visiting the IBM Zurich lab whom I&rsquo;m supervising, we found out that there is! I&rsquo;ll cut the story short for the impatient reader: at worst, the error rate of your ensemble can be about <strong>twice</strong> that of your individual models (assuming they have comparable accuracies)!</p>
+<p>To make it more exact, if we have $K$ datapoints, and our $2n+1$ individual models each have an error rate of $e$ (where $e=1-\text{accuracy}$), we will prove that the worst possible error rate for the ensemble $e^*_\text{ens}$ has the following asymptotic behavior</p>
+<p>$$\lim_{K\to\infty}e^*_\text{ens} = \left(2-\frac{1}{n+1}\right) e$$</p>
+<p>So there is indeed a lower bound on the accuracy of an ensemble, but it&rsquo;s actually worse than I would naively have expected!</p>
+<h1 id="not-a-proof">Not a proof</h1>
+<p>Let us start with something that is often quoted when discussing the properties of ensembles, which is a theorem about their asymptotic properties:</p>
+<p><strong>Theorem:</strong> Given $2n+1$ uncorrelated binary classification models that have a probability $p&gt;0.5$ of being correct on each data point, the asymptotic accuracy of their majority-voting ensemble is $1$ as $n\to \infty$.</p>
+<p>This probabilistic approach is based on modelling the probability of each model on each datapoint as a Bernoulli random variable. That means that we only control the <em>expected</em> accuracy of each model, which is $\mathbb{E} a = p$, but a given model can actually have any accuracy between 0 and 1. As a result, this probabilistic approach has a (very unlikely) worst case, which is when we get <em>very</em> unlucky and draw $2n+1$ models that each has an accuracy of 0, yielding an ensemble with a probability of 0.</p>
+<p>In practice, however we would probably discard models with terrible validation accuracy. I think we should have a prior on the actual performance of the models we want to ensemble because this is a lot more realistic.</p>
+<h1 id="a-combinatorial-problem">A combinatorial problem</h1>
+<p>A better model for ensembling is a collection models with a well-defined accuracy acting on a finite dataset. This means that each model is known to be correct on a pre-defined number of test data points, and wrong on the rest.
+Now, for the ensemble to be correct or wrong about a given test data point, we need a majority of the models to be correct or wrong about this data point.
+The spirit of the problem can be formulated in the following way: each model has a finite budget of errors it can make on the dataset because of its fixed accuracy. The worst case is going to be when the errors are distributed such that enough models &ldquo;agree on being wrong&rdquo; on the same data points, and that the maximal number of such data points is maximum.</p>
+<p>This is a constrained combinatorial optimization problem: for each point where the ensemble is wrong, more than half of the individual models are wrong, which depletes each of their &ldquo;error budget&rdquo;. My intuition was that the worst possible case is where we swap accross models to avoid using up all the budget of the same models together, which is indeed the case as we will see below. We&rsquo;ll formalize the problem in the symmetric case (when all the models have the same accuracy, which is probably the only one where we can hope for an analytic formula) and prove the claim above, which is that the error rate can at worse be doubled.</p>
+<h1 id="formalizing-the-problem">Formalizing the problem</h1>
+<p>Let us consider $2n+1$ models performing a classification task on a test set consisting of $K$ data points. The models all have the exact same accuracy $a$, which we will conveniently choose so that $Ka=A$, the number of correctly predicted instances, is an integer. For convenience, let us also define $E=Ke=N-A$, the number of incorrectly predicted instance for each model. Working with $E$ instead of $e$ is easier in practice.</p>
+<p>We want to define a model ensemble by majority voting, which will predict correctly a data point if $n+1$ models at least predict it correctly.</p>
+<p>What is the worse possible accuracy that this model ensemble can reach?</p>
+<h2 id="result">Result</h2>
+<p>Before going into the technicalities, let us announce what we&rsquo;re going to prove.</p>
+<p>The worst number $E^*_\text{ens}=e^* K$ of data points incorrectly predicted by such a model ensemble verifies</p>
+<p>$$ (2n+1) \left(1+\left\lfloor\frac{E}{n+1}\right\rfloor\right) \geq E^*_\text{ens} \geq (2n+1) \left\lfloor\frac{E}{n+1}\right\rfloor.$$</p>
+<p>The lower bound is actually $\min\left(K,(2n+1) \left\lfloor\dfrac{E}{n+1}\right\rfloor\right)$, because of course the number of errors cannot be larger than the total number of data points, but we will assume that this is never the case.</p>
+<p> </p>
+<p>In the limit of a large dataset $K\to\infty$, $\left\lfloor\dfrac{E}{n+1}\right\rfloor \sim \dfrac{E}{n+1}$ and $\dfrac{2n+1}{n+1}\sim 2$ so that both the upper and lower bounds of the inequality become asymptotically equivalent to $2E$, hence proving the result we claimed in the introduction.</p>
+<p> </p>
+<p>But of course, the real meat is proving the inequality in the first place! So let&rsquo;s get to it.</p>
+<h2 id="setting-up-notation">Setting up notation</h2>
+<p>The important information we need to keep track of is the &ldquo;error budget&rdquo; that each model has. We can reframe the problem as follow:</p>
+<p>Given an error budget for each model encoded as the vector of size $(2n+1)$,
+$B=(E,\dots,E),$
+find the maximal size for a collection of vectors $(v_1, \dots, v_k)$ such that</p>
+<ul>
+<li>Each vector $v_i$ contains only $0$ or $1$</li>
+<li>Each vector $v_i$ contains at least $n+1$ entries equal to $1$</li>
+<li>$B-\displaystyle\sum_{i=1}^k v_i$ only has non-negative entries</li>
+</ul>
+<p>Each of the $v_i$ represents a datapoint which the ensemble predicts incorrectly, and the $1$-entries correspond to individual models which predicted it incorrectly. We will call them error assignments.
+The last two constraints mean respectively that the majority of individual models must be wrong about a data point in order for the ensemble to be wrong too, and that each model can only be wrong on at most $E$ data points.</p>
+<h2 id="proof">Proof</h2>
+<p>First of all let us establish something: the best solution has to use the error budget to the best possible efficiency. This means that necessarily, each $v_i$ will have exactly $n+1$ entries equal to $1$.</p>
+<p>We will prove the following steps:</p>
+<ol>
+<li>
+<p>$E^*_\text{ens}$ is an increasing function of $E$</p>
+</li>
+<li>
+<p>For any integer $p$, if $E=p(n+1)$, $E^*_\text{ens}=(2n+1)p$</p>
+</li>
+</ol>
+<p>Which leads to the framing inequality we claimed above because
+$$(n+1)\left(1+\left\lfloor\frac{E}{n+1}\right\rfloor\right) \geq E\geq (n+1)\left\lfloor\frac{E}{n+1}\right\rfloor $$</p>
+<h3 id="e_textens-is-a-strictly-increasing-function-of-e">$E^*_\text{ens}$ is a strictly increasing function of $E$</h3>
+<p>This is easy to prove: if a collection of error assignments $(v_1,&hellip;,v_k)$ verifies the constraints for an error budget of $E$, it verifies them for $E+1$ as well.
+Furthermore it also verifies them for a budget of $B=(E,\dots,E,E+1,\dots,E+1)$, with $n+1$ entries with value $E$, which is obtained starting from $E+1$ and subtracting $v_0=(1,\dots,1,0,\dots,0)$.</p>
+<h3 id="if-epn1-with-pinmathbbn-e_textens2n1p">If $E=p(n+1)$ with $p\in\mathbb{N}$, $E^*_\text{ens}=(2n+1)p$</h3>
+<p>We will prove this by exhibiting a suitable collection of error assignments.
+Let us start by subtracting $v_1=(1,\dots,1,0,\dots,0)$ with $n+1$ nonzero entries.
+We then build $v_{i+1}$ from $v_i$ by applying a circular permutation to its entries (<em>i.e.</em> $v_2=(0,1,\dots,1,0,\dots,0)$ and so on).</p>
+<p>If we subtract the first vector, the budget will look like
+$$B_1 = B-v_1 = (E-1,\dots,E-1,E,\dots,E).$$
+After one more step, we get
+$$B_2 = B-v_1-v_2 = (E-1, E-2, \dots, E-2, E-1,\dots,E).$$
+After $n+1$ total steps, we get this nice valley pattern:
+$$B_{n+1} = (E-1,\ E-2,\ E-3,\ \dots,\ E-n,\ E-(n+1),\ E-n,\ \dots,\ E-3,\ E-2,\ E-1),$$
+which should be clear because for the first $n$ entries, their position is the number of vectors they get subtracted before the &ldquo;window of $1$s&rdquo; leaves them, and the reverse happens for the last $n$ entries. The middle entries is subtracted for every single of these first $n+1$ steps.</p>
+<p>Now if we apply one more step, we see that the window applies to the last $n$ entries and the first one. Going on for a total of $n$ steps, each one of the last $n$ entries will be covered by the window exactly the number of times needed to reach $E-(n+1)$, and the same will happen for the first $n$, while the middle entry will be left untouched.</p>
+<p>So after $2n+1$ steps, we reach a symmetric situation gain with
+$$B_{2n+1}=(E-(n+1),\dots,E-(n+1)),$$</p>
+<p>Which means that if $E=p(n+1)$, we can repeat these $2n+1$ steps $p$ times, and thus that we did a total of $p(2n+1)$ steps, which is the number of mistakes our ensemble made.</p>
+<p>Why is this the worst-case scenario? After these $p(2n+1)$ steps, the error budget of all models is completely exhausted since
+$$B_{p(2n+1)} = (0,\dots 0).$$</p>
+<h2 id="putting-it-all-together">Putting it all together</h2>
+<p>For any error budget $E$, we have the framing inequality</p>
+<p>$$(n+1)\left(1+\left\lfloor\frac{E}{n+1}\right\rfloor\right) \geq E\geq (n+1)\left\lfloor\frac{E}{n+1}\right\rfloor.$$</p>
+<p>(Which is just the statement that $E$ is framed bt two multiples of $n+1$)</p>
+<p>For the two values framing $E$, we have an exact value for $E^*_\text{ens}$, because they are of the form $p(n+1)$ with</p>
+<p>$$p=1+\left\lfloor\frac{E}{n+1}\right\rfloor\text{ and } p=\left\lfloor\frac{E}{n+1}\right\rfloor\text{ respectively.}$$</p>
+<p>Therefore, the desired framing inequality is true:
+$$ (2n+1) \left(1+\left\lfloor\frac{E}{n+1}\right\rfloor\right) \geq E^*_\text{ens} \geq (2n+1) \left\lfloor\frac{E}{n+1}\right\rfloor.$$</p>
+
+</div>
+
+        </div><div id="footer" class="mb-5">
+        <hr>
+        <div class="container text-center"><small>
+            	<a href="/">Nicolas Deutschmann</a>
+	        </small><span class="nav-item navbar-text mx-1">/</span><small>
+            	<a href="https://www.twitter.com/nickgermann"><i class="fab fa-twitter"></i></a>
+	        </small><span class="nav-item navbar-text mx-1">/</span><small>
+            	<a href="www.github.com/ndeutschmann"><i class="fab fa-github"></i></a>
+	        </small><span class="nav-item navbar-text mx-1">/</span><small>
+            	<a href="https://www.semanticscholar.org/author/N.-Deutschmann/102335445"><i class="fas fa-graduation-cap"></i></a>
+	        </small></div>
+</div>
+</body>
+</html>

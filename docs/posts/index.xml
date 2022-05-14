@@ -5,7 +5,16 @@
     <link>/posts/</link>
     <description>Recent content in Posts on Nicolas Deutschmann</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 25 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Worst-case scenario for a model ensemble</title>
+      <link>/posts/worst_ensemble/</link>
+      <pubDate>Tue, 03 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/worst_ensemble/</guid>
+      <description>Introduction It&amp;rsquo;s part of machine learning &amp;ldquo;folk wisdom&amp;rdquo; that ensembles of models are a good way to really optimize your prediction and getting the most of your data. Kaggle competitions are often won by ensembles, and there are some theoretical guarantees that make you fell good about them (although their hypotheses are never verified in real life). In practice, it&amp;rsquo;s definitely mostly a good idea to use ensembles; they most often improve performance and provide some ways to estimate uncertainty by checking the agreement of the different models.</description>
+    </item>
+    
     <item>
       <title>Monte Carlo Integrals over $\mathbb{R}$</title>
       <link>/posts/monte_carlo_infinite/</link>
