@@ -3,16 +3,16 @@ title: "Worst-case scenario for a model ensemble"
 date: 2022-05-03
 ---
 # Introduction
-It's part of machine learning "folk wisdom" that ensembles of models are a good way to really optimize your prediction and getting the most of your data. Kaggle competitions are often won by ensembles, and there are some theoretical guarantees that make you fell good about them (although their hypotheses are never verified in real life). In practice, it's definitely mostly a good idea to use ensembles; they do most often improve performance and they have other advantages such as providing some ways to estimate uncertainty by checking the agreement of the different models.
+It's part of machine learning "folk wisdom" that ensembles of models are a good way to really optimize your prediction and getting the most of your data. Kaggle competitions are often won by ensembles, and there are some theoretical guarantees that make you fell good about them (although their hypotheses are never verified in real life). In practice, it's definitely mostly a good idea to use ensembles; they most often improve performance and provide some ways to estimate uncertainty by checking the agreement of the different models.
 
 But is it guaranteed that an ensemble will perform better than the individual models that make it up? I certainly had an intuition that, at least, the ensemble cannot be **much** worse than its components. 
 Just the other day, a Master's student of mine showed me results where they had five models with an accuracy of 90%, but which yielded a 65% accuracy when ensembled. I immediately knew something was up, without knowing exactly how to justify it, and indeed a small bug had crept up in their ensembling code.
 
 While in this specific case, the issue was just human error (which it most often is), it lead me to wonder about this expectation I had about model ensembles. Can we actually put a lower bound on the accuracy of an ensemble based on its components? Together with Francesco Craighero, a PhD student visiting the IBM Zurich lab whom I'm supervising, we found out that there is! I'll cut the story short for the impatient reader: at worst, the error rate of your ensemble can be about **twice** that of your individual models (assuming they have comparable accuracies)!
 
-To make it more exact, if we have $N$ datapoints, and our $2n+1$ individual models have an error rate of $e$ (where $e=1-\text{accuracy}$), we will prove that the worst possible error rate for the ensemble $e^*_\text{ens}$ has the following asymptotic behavior
+To make it more exact, if we have $K$ datapoints, and our $2n+1$ individual models each have an error rate of $e$ (where $e=1-\text{accuracy}$), we will prove that the worst possible error rate for the ensemble $e^*_\text{ens}$ has the following asymptotic behavior
 
-$$\lim_{N\to\infty}e^*_\text{ens} = \left(2-\frac{1}{n+1}\right) e$$
+$$\lim_{K\to\infty}e^*_\text{ens} = \left(2-\frac{1}{n+1}\right) e$$
 
 
 So there is indeed a lower bound on the accuracy of an ensemble, but it's actually worse than I would naively have expected! 
@@ -21,21 +21,23 @@ So there is indeed a lower bound on the accuracy of an ensemble, but it's actual
 
 Let us start with something that is often quoted when discussing the properties of ensembles, which is a theorem about their asymptotic properties:
 
-**Theorem:** Given $n$ uncorrelated binary classification models that have a probability $p>0.5$ of being correct on each data point, the asymptotic accuracy of their majority-voting ensemble is $1$ as $n\to \infty$.
+**Theorem:** Given $2n+1$ uncorrelated binary classification models that have a probability $p>0.5$ of being correct on each data point, the asymptotic accuracy of their majority-voting ensemble is $1$ as $n\to \infty$.
 
-This probabilistic approach is based on modelling the probability of each model on each datapoint as a Bernouilli random variable. We could use it to evaluate the distribution of accuracies when there is a finite number of models, but we would find that there is always a probability that the ensemble has accuracy $0$, which can happen for example when all individual models have an accuracy of $0$. This is due to the probabilistic description of accuracy used for this theorem, but we would probably discard models with terrible validation accuracy in real life. We could use this description to have a confidence interval on the accuracy of the ensemble, but I think we should have a prior on the actual performance of the models we want to ensemble because this is a lot more realistic.
+This probabilistic approach is based on modelling the probability of each model on each datapoint as a Bernoulli random variable. That means that we only control the *expected* accuracy of each model, which is $\mathbb{E} a = p$, but a given model can actually have any accuracy between 0 and 1. As a result, this probabilistic approach has a (very unlikely) worst case, which is when we get *very* unlucky and draw $2n+1$ models that each has an accuracy of 0, yielding an ensemble with a probability of 0. 
+
+In practice, however we would probably discard models with terrible validation accuracy. I think we should have a prior on the actual performance of the models we want to ensemble because this is a lot more realistic.
 
 # A combinatorial problem
 A better model for ensembling is a collection models with a well-defined accuracy acting on a finite dataset. This means that each model is known to be correct on a pre-defined number of test data points, and wrong on the rest.
 Now, for the ensemble to be correct or wrong about a given test data point, we need a majority of the models to be correct or wrong about this data point.
 The spirit of the problem can be formulated in the following way: each model has a finite budget of errors it can make on the dataset because of its fixed accuracy. The worst case is going to be when the errors are distributed such that enough models "agree on being wrong" on the same data points, and that the maximal number of such data points is maximum. 
 
-This is a constrained combinatorial optimization problem: for each point where the ensemble is wrong, more than half of the individual models are wrong, which depletes each of their "error budget". So the worst possible case is where we swap accross models to avoid using up all the budget of the same models together. We'll formalize the problem in the symmetric case (when all the models have the same accuracy, which is probably the only one where we can hope for an analytic formula) and prove the claim above, which is that the error rate can at worse be doubled.
+This is a constrained combinatorial optimization problem: for each point where the ensemble is wrong, more than half of the individual models are wrong, which depletes each of their "error budget". My intuition was that the worst possible case is where we swap accross models to avoid using up all the budget of the same models together, which is indeed the case as we will see below. We'll formalize the problem in the symmetric case (when all the models have the same accuracy, which is probably the only one where we can hope for an analytic formula) and prove the claim above, which is that the error rate can at worse be doubled.
 
 
 # Formalizing the problem
 
-Let us consider $2n+1$ models performing a classification task on a test set consisting of $N$ data points. The models all have the exact same accuracy $a$, which we will conveniently choose so that $Na=A$, the number of correctly predicted instances, is an integer. For convenience, let us also define $E=N-A$, the number of incorrectly predicted instance for each model.
+Let us consider $2n+1$ models performing a classification task on a test set consisting of $K$ data points. The models all have the exact same accuracy $a$, which we will conveniently choose so that $Ka=A$, the number of correctly predicted instances, is an integer. For convenience, let us also define $E=Ke=N-A$, the number of incorrectly predicted instance for each model. Working with $E$ instead of $e$ is easier in practice.
 
 We want to define a model ensemble by majority voting, which will predict correctly a data point if $n+1$ models at least predict it correctly.
 
@@ -44,15 +46,15 @@ What is the worse possible accuracy that this model ensemble can reach?
 ## Result
 Before going into the technicalities, let us announce what we're going to prove.
 
-The worst number $E^*_\text{ens}=e^\* N$ of data points incorrectly predicted by such a model ensemble verifies
+The worst number $E^*_\text{ens}=e^\* K$ of data points incorrectly predicted by such a model ensemble verifies
 
 $$ (2n+1) \left(1+\left\lfloor\frac{E}{n+1}\right\rfloor\right) \geq E^*_\text{ens} \geq (2n+1) \left\lfloor\frac{E}{n+1}\right\rfloor.$$
 
-The lower bound is actually $\min\left(N,(2n+1) \left\lfloor\dfrac{E}{n+1}\right\rfloor\right)$, because of course the number of errors cannot be larger than the total number of data points, but we will assume that this is never the case.
+The lower bound is actually $\min\left(K,(2n+1) \left\lfloor\dfrac{E}{n+1}\right\rfloor\right)$, because of course the number of errors cannot be larger than the total number of data points, but we will assume that this is never the case.
 
 &nbsp; 
 
-In the limit of a large dataset $N\to\infty$, $\left\lfloor\dfrac{E}{n+1}\right\rfloor \sim \dfrac{E}{n+1}$ and $\dfrac{2n+1}{n+1}\sim 2$ so that both the upper and lower bounds of the inequality become asymptotically equivalent to $2E$, hence proving the result we claimed in the introduction.
+In the limit of a large dataset $K\to\infty$, $\left\lfloor\dfrac{E}{n+1}\right\rfloor \sim \dfrac{E}{n+1}$ and $\dfrac{2n+1}{n+1}\sim 2$ so that both the upper and lower bounds of the inequality become asymptotically equivalent to $2E$, hence proving the result we claimed in the introduction.
 
 &nbsp; 
 
@@ -61,7 +63,7 @@ But of course, the real meat is proving the inequality in the first place! So le
 ## Setting up notation
 The important information we need to keep track of is the "error budget" that each model has. We can reframe the problem as follow:
 
-Given an error budget for each model encoded as the $(2n+1)-$vector
+Given an error budget for each model encoded as the vector of size $(2n+1)$, 
 $B=(E,\dots,E),$
 find the maximal size for a collection of vectors $(v_1, \dots, v_k)$ such that
 * Each vector $v_i$ contains only $0$ or $1$
@@ -78,16 +80,16 @@ We will prove the following steps:
 
 1. $E^*_\text{ens}$ is an increasing function of $E$
 
-2. If $E=p(n+1)$, $E^*_\text{ens}=(2n+1)p$ 
+2. For any integer $p$, if $E=p(n+1)$, $E^*_\text{ens}=(2n+1)p$ 
 
 Which leads to the framing inequality we claimed above because 
 $$(n+1)\left(1+\left\lfloor\frac{E}{n+1}\right\rfloor\right) \geq E\geq (n+1)\left\lfloor\frac{E}{n+1}\right\rfloor $$  
 
-### $E^*_\text{ens}$ is a strictly increasing function of $E$  
+### $E^*_\text{ens}$ is a strictly increasing function of $E$
 This is easy to prove: if a collection of error assignments $(v_1,...,v_k)$ verifies the constraints for an error budget of $E$, it verifies them for $E+1$ as well. 
 Furthermore it also verifies them for a budget of $B=(E,\dots,E,E+1,\dots,E+1)$, with $n+1$ entries with value $E$, which is obtained starting from $E+1$ and subtracting $v_0=(1,\dots,1,0,\dots,0)$.
 
-### If $E=p(n+1)$, $E^*_\text{ens}=(2n+1)k$
+### If $E=p(n+1)$ with $p\in\mathbb{N}$, $E^*_\text{ens}=(2n+1)p$
 We will prove this by exhibiting a suitable collection of error assignments.
 Let us start by subtracting $v_1=(1,\dots,1,0,\dots,0)$ with $n+1$ nonzero entries.
 We then build $v_{i+1}$ from $v_i$ by applying a circular permutation to its entries (*i.e.* $v_2=(0,1,\dots,1,0,\dots,0)$ and so on).
