@@ -37,7 +37,7 @@ This is a constrained combinatorial optimization problem: for each point where t
 
 # Formalizing the problem
 
-Let us consider $2n+1$ models performing a classification task on a test set consisting of $K$ data points. The models all have the exact same accuracy $a$, which we will conveniently choose so that $Ka=A$, the number of correctly predicted instances, is an integer. For convenience, let us also define $E=Ke=N-A$, the number of incorrectly predicted instance for each model. Working with $E$ instead of $e$ is easier in practice.
+Let us consider $2n+1$ models performing a classification task on a test set consisting of $K$ data points. The models all have the exact same accuracy $a$, which we will conveniently choose so that $Ka=A$, the number of correctly predicted instances, is an integer. For convenience, let us also define $E=Ke=K-A$, the number of incorrectly predicted instance for each model. Working with $E$ instead of $e$ is easier in practice.
 
 We want to define a model ensemble by majority voting, which will predict correctly a data point if $n+1$ models at least predict it correctly.
 
