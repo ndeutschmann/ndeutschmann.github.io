@@ -54,7 +54,7 @@ The lower bound is actually $\min\left(K,(2n+1) \left\lfloor\dfrac{E}{n+1}\right
 
 &nbsp; 
 
-In the limit of a large dataset $K\to\infty$, $\left\lfloor\dfrac{E}{n+1}\right\rfloor \sim \dfrac{E}{n+1}$ and $\dfrac{2n+1}{n+1}\sim 2$ so that both the upper and lower bounds of the inequality become asymptotically equivalent to $2E$, hence proving the result we claimed in the introduction.
+In the limit of a large dataset $K\to\infty$, $\left\lfloor\dfrac{E}{n+1}\right\rfloor \sim \left\lfloor\dfrac{E}{n+1}\right\rfloor+1 \sim \dfrac{E}{n+1}$ so that both the upper and lower bounds of the inequality become asymptotically equivalent to $$\left(\frac{2n+1}{n+1}\right)E=\left(2 - \frac{1}{n+1}\right)E,$$ hence proving the result we claimed in the introduction.
 
 &nbsp; 
 
@@ -89,7 +89,7 @@ $$(n+1)\left(1+\left\lfloor\frac{E}{n+1}\right\rfloor\right) \geq E\geq (n+1)\le
 This is easy to prove: if a collection of error assignments $(v_1,...,v_k)$ verifies the constraints for an error budget of $E$, it verifies them for $E+1$ as well. 
 Furthermore it also verifies them for a budget of $B=(E,\dots,E,E+1,\dots,E+1)$, with $n+1$ entries with value $E$, which is obtained starting from $E+1$ and subtracting $v_0=(1,\dots,1,0,\dots,0)$.
 
-### If $E=p(n+1)$ with $p\in\mathbb{N}$, $E^*_\text{ens}=(2n+1)p$
+### If $E=p(n+1)$ with $p\in\mathbb{N}$, then $\boxed{E^*_\text{ens}=(2n+1)p}$
 We will prove this by exhibiting a suitable collection of error assignments.
 Let us start by subtracting $v_1=(1,\dots,1,0,\dots,0)$ with $n+1$ nonzero entries.
 We then build $v_{i+1}$ from $v_i$ by applying a circular permutation to its entries (*i.e.* $v_2=(0,1,\dots,1,0,\dots,0)$ and so on).
