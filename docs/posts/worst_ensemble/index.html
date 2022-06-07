@@ -107,7 +107,7 @@ Now, for the ensemble to be correct or wrong about a given test data point, we n
 The spirit of the problem can be formulated in the following way: each model has a finite budget of errors it can make on the dataset because of its fixed accuracy. The worst case is going to be when the errors are distributed such that enough models &ldquo;agree on being wrong&rdquo; on the same data points, and that the maximal number of such data points is maximum.</p>
 <p>This is a constrained combinatorial optimization problem: for each point where the ensemble is wrong, more than half of the individual models are wrong, which depletes each of their &ldquo;error budget&rdquo;. My intuition was that the worst possible case is where we swap accross models to avoid using up all the budget of the same models together, which is indeed the case as we will see below. We&rsquo;ll formalize the problem in the symmetric case (when all the models have the same accuracy, which is probably the only one where we can hope for an analytic formula) and prove the claim above, which is that the error rate can at worse be doubled.</p>
 <h1 id="formalizing-the-problem">Formalizing the problem</h1>
-<p>Let us consider $2n+1$ models performing a classification task on a test set consisting of $K$ data points. The models all have the exact same accuracy $a$, which we will conveniently choose so that $Ka=A$, the number of correctly predicted instances, is an integer. For convenience, let us also define $E=Ke=N-A$, the number of incorrectly predicted instance for each model. Working with $E$ instead of $e$ is easier in practice.</p>
+<p>Let us consider $2n+1$ models performing a classification task on a test set consisting of $K$ data points. The models all have the exact same accuracy $a$, which we will conveniently choose so that $Ka=A$, the number of correctly predicted instances, is an integer. For convenience, let us also define $E=Ke=K-A$, the number of incorrectly predicted instance for each model. Working with $E$ instead of $e$ is easier in practice.</p>
 <p>We want to define a model ensemble by majority voting, which will predict correctly a data point if $n+1$ models at least predict it correctly.</p>
 <p>What is the worse possible accuracy that this model ensemble can reach?</p>
 <h2 id="result">Result</h2>
@@ -116,7 +116,7 @@ The spirit of the problem can be formulated in the following way: each model has
 <p>$$ (2n+1) \left(1+\left\lfloor\frac{E}{n+1}\right\rfloor\right) \geq E^*_\text{ens} \geq (2n+1) \left\lfloor\frac{E}{n+1}\right\rfloor.$$</p>
 <p>The lower bound is actually $\min\left(K,(2n+1) \left\lfloor\dfrac{E}{n+1}\right\rfloor\right)$, because of course the number of errors cannot be larger than the total number of data points, but we will assume that this is never the case.</p>
 <p> </p>
-<p>In the limit of a large dataset $K\to\infty$, $\left\lfloor\dfrac{E}{n+1}\right\rfloor \sim \dfrac{E}{n+1}$ and $\dfrac{2n+1}{n+1}\sim 2$ so that both the upper and lower bounds of the inequality become asymptotically equivalent to $2E$, hence proving the result we claimed in the introduction.</p>
+<p>In the limit of a large dataset $K\to\infty$, $\left\lfloor\dfrac{E}{n+1}\right\rfloor \sim \left\lfloor\dfrac{E}{n+1}\right\rfloor+1 \sim \dfrac{E}{n+1}$ so that both the upper and lower bounds of the inequality become asymptotically equivalent to $$\left(\frac{2n+1}{n+1}\right)E=\left(2 - \frac{1}{n+1}\right)E,$$ hence proving the result we claimed in the introduction.</p>
 <p> </p>
 <p>But of course, the real meat is proving the inequality in the first place! So let&rsquo;s get to it.</p>
 <h2 id="setting-up-notation">Setting up notation</h2>
@@ -147,7 +147,7 @@ $$(n+1)\left(1+\left\lfloor\frac{E}{n+1}\right\rfloor\right) \geq E\geq (n+1)\le
 <h3 id="e_textens-is-a-strictly-increasing-function-of-e">$E^*_\text{ens}$ is a strictly increasing function of $E$</h3>
 <p>This is easy to prove: if a collection of error assignments $(v_1,&hellip;,v_k)$ verifies the constraints for an error budget of $E$, it verifies them for $E+1$ as well.
 Furthermore it also verifies them for a budget of $B=(E,\dots,E,E+1,\dots,E+1)$, with $n+1$ entries with value $E$, which is obtained starting from $E+1$ and subtracting $v_0=(1,\dots,1,0,\dots,0)$.</p>
-<h3 id="if-epn1-with-pinmathbbn-e_textens2n1p">If $E=p(n+1)$ with $p\in\mathbb{N}$, $E^*_\text{ens}=(2n+1)p$</h3>
+<h3 id="if-epn1-with-pinmathbbn-then-boxede_textens2n1p">If $E=p(n+1)$ with $p\in\mathbb{N}$, then $\boxed{E^*_\text{ens}=(2n+1)p}$</h3>
 <p>We will prove this by exhibiting a suitable collection of error assignments.
 Let us start by subtracting $v_1=(1,\dots,1,0,\dots,0)$ with $n+1$ nonzero entries.
 We then build $v_{i+1}$ from $v_i$ by applying a circular permutation to its entries (<em>i.e.</em> $v_2=(0,1,\dots,1,0,\dots,0)$ and so on).</p>
