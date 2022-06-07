@@ -102,10 +102,16 @@ After $n+1$ total steps, we get this nice valley pattern:
 $$B_{n+1} = (E-1,\ E-2,\ E-3,\ \dots,\ E-n,\ E-(n+1),\ E-n,\ \dots,\ E-3,\ E-2,\ E-1),$$
 which should be clear because for the first $n$ entries, their position is the number of vectors they get subtracted before the "window of $1$s" leaves them, and the reverse happens for the last $n$ entries. The middle entries is subtracted for every single of these first $n+1$ steps.
 
+The whole procedure is summarized in the figure below:
+![Worst Ensemble Step 2](/worst_ensemble_step1_cropped.png)
+
 Now if we apply one more step, we see that the window applies to the last $n$ entries and the first one. Going on for a total of $n$ steps, each one of the last $n$ entries will be covered by the window exactly the number of times needed to reach $E-(n+1)$, and the same will happen for the first $n$, while the middle entry will be left untouched.
 
 So after $2n+1$ steps, we reach a symmetric situation gain with
 $$B_{2n+1}=(E-(n+1),\dots,E-(n+1)),$$
+as illustrated below
+![Worst Ensemble Step 2](/worst_ensemble_step2_cropped.png)
+
 
 Which means that if $E=p(n+1)$, we can repeat these $2n+1$ steps $p$ times, and thus that we did a total of $p(2n+1)$ steps, which is the number of mistakes our ensemble made.
 
