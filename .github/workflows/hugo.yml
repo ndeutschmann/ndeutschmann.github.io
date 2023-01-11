@@ -4,7 +4,7 @@ name: Deploy Hugo site to Pages
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
   # Runs on pushes targeting the default branch
   schedule:
     # * is a special character in YAML so you have to quote this string
