@@ -50,7 +50,7 @@ def urlify(s: str):
 p: dict
 for p in nico["publications"][::-1]:
     print("--------------")
-    scholarly.fill(p, sections=["basics"])
+    scholarly.fill(p)
     try:
         bib: dict = p['bib']
         title = bib['title']
@@ -91,5 +91,5 @@ for p in nico["publications"][::-1]:
     print(page_content)
     print("")
     with open(page_path, "w") as pubfile:
-        pubfile.write()
+        pubfile.write(page_content
 
