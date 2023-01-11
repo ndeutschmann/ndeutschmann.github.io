@@ -39,12 +39,9 @@ date: "{date}-01-01"
 private: {"false" if abstract else "true"}
 ---
 
-{abstract}
-
-
 """
     if abstract:
-        content += f"[> Link to publication]({url})"
+        content += abstract
 
     return content
 
