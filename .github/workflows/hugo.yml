@@ -50,7 +50,7 @@ jobs:
         with:
           submodules: recursive
       - name: Get and set citation variables
-        run: python setup_citations.py
+        run: python setup_variables.py
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v2
