@@ -23,4 +23,5 @@ My research covered a mixture of data analysis, experiment interpretation recast
 I switched to Machine Learning research in 2020 and I am focussing on diverse aspects of Robust Machine Learning, as
 well as applications to the natural sciences. My current interest span uncertainty estimation, interpretability,
 as well as how these topics help us understand how and when neural networks generalise.
+
 Read more about it on my [research page.](research)
