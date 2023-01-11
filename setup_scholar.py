@@ -49,6 +49,7 @@ def urlify(s: str):
 
 p: dict
 for p in nico["publications"][::-1]:
+    print("--------------")
     scholarly.fill(p, sections=["basics"])
     try:
         bib: dict = p['bib']
@@ -85,6 +86,10 @@ for p in nico["publications"][::-1]:
 
     page_path = f"content/research/publications/{page_filename}.md"
     print(f"creating {page_path}")
+    page_content = publication_markdown_template(title, authors, date, abstract, url)
+    print("Page content:")
+    print(page_content)
+    print("")
     with open(page_path, "w") as pubfile:
-        pubfile.write(publication_markdown_template(title, authors, date, abstract, url))
+        pubfile.write()
 
