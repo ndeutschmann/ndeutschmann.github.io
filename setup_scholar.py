@@ -31,7 +31,7 @@ def publication_markdown_template(
         abstract=None,
         url=None
 ):
-    content= f"""---
+    content = f"""---
 title: "{title}"
 authors: "{authors}"
 link: "{url}"
@@ -44,13 +44,14 @@ private: {"false" if abstract else "true"}
 
 """
     if abstract:
-        content+="[> Link to publication]({url})"
+        content += f"[> Link to publication]({url})"
 
     return content
 
 
 def urlify(s: str):
     return ''.join([c for c in s.replace(' ', '-').lower() if c.isalnum() or c == '-'])
+
 
 p: dict
 for p in nico["publications"][::-1]:
@@ -97,4 +98,3 @@ for p in nico["publications"][::-1]:
     print("")
     with open(page_path, "w") as pubfile:
         pubfile.write(page_content)
-
