@@ -1,15 +1,24 @@
 {{ define "main" }}
 <div class="container">
     <h1>{{ .Title }}</h1>
+    <p> {{.Site.Params.footer.citation_count}} citations | h-index {{.Site.Params.footer.h_index}}</p>
+    <br>
     <ul>
         {{ range .Pages.ByDate.Reverse}}
-            <li>{{if .Params.private}}
-                <a href={{.Params.link}}>{{.Title}}</a> 
-                {{else}}
-                <a href="{{.Permalink}}">{{ .Title }}</a>
-                {{end}}
-            </li>
+        <li>
+            {{if .Params.private}}
+            <a href={{.Params.link}}>{{.Title | title}}</a>
+            {{else}}
+            <a href="{{.Permalink}}">{{ .Title | title}}</a>
+            {{end}}
+            {{if .Params.date }}
+            ({{.Params.date.Format "2006"}})
+            {{end}}
+            <p><small>{{.Params.authors | title}}</small></p>
+            <p>{{.Summary}}</p>
+        </li>
         {{ end }}
     </ul>
+
 </div>
 {{ end }}

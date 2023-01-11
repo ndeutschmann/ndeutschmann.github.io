@@ -5,6 +5,7 @@ disableKinds = ["taxonomy", "term"]
 enableEmoji = true
 math = true          # enable KaTeX (https://katex.org/) globally
 disableHugoGeneratorInject = false
+summaryLength = 15
 
 [params]
   author = "Nicolas Deutschmann"

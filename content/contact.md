@@ -14,9 +14,9 @@ weight: 110
 ---
 ### Social
 {{<center>}}
-<i class="fab fa-github"></i> GitHub: [ndeutschmann](https://github.com/ojroques/hugo-researcher)  
-<i class="fab fa-twitter"></i> Twitter: [@nickgermann](http://www.twitter.com/nickgermann)  
-<i class="fas fa-graduation-cap"></i> Semantic Scholar: [N. Deutschmann]("https://www.semanticscholar.org/author/N.-Deutschmann/102335445")
+<i class="fab fa-github"></i> GitHub: [ndeutschmann](https://github.com/ndeutschmann)
+<i class="fab fa-twitter"></i> Twitter: [@nickgermann](http://www.twitter.com/nickgermann)  
+<i class="fas fa-graduation-cap"></i> Google Scholar: [N. Deutschmann]("https://scholar.google.com/citations?user=GBAFB2AAAAAJ")
 {{</center>}}
 <i class="fas fa-id-card"></i> ORCID: [0000-0003-0432-1429](https://orcid.org/0000-0003-0432-1429)
 
