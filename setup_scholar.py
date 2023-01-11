@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import tomlkit
 from pylatexenc.latex2text import LatexNodes2Text
 from scholarly import scholarly
@@ -51,6 +53,8 @@ def urlify(s: str):
     return ''.join([c for c in s.replace(' ', '-').lower() if c.isalnum() or c == '-'])
 
 
+excluded_terms = ["erratum"]
+
 p: dict
 year_counts = dict()
 for p in nico["publications"][::-1]:
@@ -62,8 +66,25 @@ for p in nico["publications"][::-1]:
     except KeyError:
         print("Skipping incomplete publication")
         continue
+
+    exclude = False
+    for et in excluded_terms:
+        if et in title.lower():
+            print(f"Skipping: {title}")
+            exclude = True
+            break
+    if exclude:
+        continue
+
     print("Preparing publication")
     print(f"{title}")
+
+    page_filename = urlify(title)
+
+    page_path = f"content/research/publications/{page_filename}.md"
+    if Path(page_path).exists():
+        print("A page for this publication already exists, skipping")
+        continue
 
     authors = bib.get("author", None)
     date = bib.get("pub_year", None)
@@ -87,9 +108,6 @@ for p in nico["publications"][::-1]:
     if abstract is not None:
         abstract = LatexNodes2Text().latex_to_text(abstract)
 
-    page_filename = urlify(title)
-
-    page_path = f"content/research/publications/{page_filename}.md"
     print(f"creating {page_path}")
 
     if date in year_counts:
