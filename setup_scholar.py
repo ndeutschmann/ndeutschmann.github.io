@@ -5,7 +5,7 @@ from scholarly import scholarly
 # Citation info
 nico = scholarly.search_author_id('GBAFB2AAAAAJ', sortby='year')
 print("Found")
-scholarly.fill(nico, sections=["indices", "publications"])
+scholarly.fill(nico, sections=["indices", "publications"], sortby='year')
 citations = nico["citedby"]
 h_index = nico["hindex"]
 print(f"Citations: {citations}, h-index: {h_index}")
@@ -29,13 +29,14 @@ def publication_markdown_template(
         authors=None,
         date=None,
         abstract=None,
-        url=None
+        url=None,
+        count=1
 ):
     content = f"""---
 title: "{title}"
 authors: "{authors}"
 link: "{url}"
-date: "{date}-01-01"
+date: "{date}-01-{count:02d}"
 private: {"false" if abstract else "true"}
 ---
 
@@ -51,6 +52,7 @@ def urlify(s: str):
 
 
 p: dict
+year_counts = dict()
 for p in nico["publications"][::-1]:
     print("--------------")
     scholarly.fill(p)
@@ -89,7 +91,13 @@ for p in nico["publications"][::-1]:
 
     page_path = f"content/research/publications/{page_filename}.md"
     print(f"creating {page_path}")
-    page_content = publication_markdown_template(title, authors, date, abstract, url)
+
+    if date in year_counts:
+        year_counts[date] += 1
+    else:
+        year_counts[date] = 1
+
+    page_content = publication_markdown_template(title, authors, date, abstract, url, year_counts[date])
     print("Page content:")
     print(page_content)
     print("")
