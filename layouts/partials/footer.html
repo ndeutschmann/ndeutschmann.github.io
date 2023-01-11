@@ -13,10 +13,15 @@
 	        	{{- end -}}
 	        	</a>
 	        </small>
-	        {{- if ne (add $i 1) $navbar_len -}}
-	            <span class="nav-item navbar-text mx-1">/</span>
-	        {{- end -}}
+			<span class="nav-item navbar-text mx-1">/</span>
 	    {{- end -}}
 	{{- end -}}
+			<small>
+			#cites:	{{ .Site.Params.footer.citation_count }}
+			</small>
+			<span class="nav-item navbar-text mx-1">/</span>
+			<small>
+			h-index: {{ .Site.Params.footer.h_index }}
+			</small>
 	</div>
 </div>

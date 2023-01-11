@@ -14,6 +14,8 @@ disableHugoGeneratorInject = false
   math = true
   [params.footer]
     text = "Nicolas Deutschmann"
+    citation_count = 270
+    h_index = 9
 
 
 [menu]
@@ -33,8 +35,8 @@ disableHugoGeneratorInject = false
     weight = 3  
   [[menu.footer]]
     pre = '<i class="fas fa-graduation-cap"></i> '
-    name = "Semantic Scholar"
-    url = "https://www.semanticscholar.org/author/N.-Deutschmann/102335445"
+    name = "Google Scholar"
+    url = "https://scholar.google.com/citations?user=GBAFB2AAAAAJ"
     weight = 4
 
 [permalinks]
